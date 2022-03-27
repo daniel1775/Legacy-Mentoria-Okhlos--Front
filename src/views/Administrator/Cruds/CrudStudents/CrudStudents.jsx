@@ -7,22 +7,6 @@ import { Modal, TextField } from "@material-ui/core";
 import Axios from "axios";
 import Swal from "sweetalert2";
 
-const Articles = [
-  {
-    name: "Nombres",
-    Surnames: "Apellidos",
-    Age: "Edad",
-    Gender: "Género",
-
-    Interests: "Intereses",
-    program: "Programa",
-    MentorAssignment: "Id Mentor",
-    estado: "Estado",
-  },
-];
-
-//Alert delete
-
 const Alertdelete = () => {
   Swal.fire({
     showCloseButton: true,
@@ -132,7 +116,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CrudStudents = () => {
-  const [data, setData] = useState([]);
   const Styles = useStyles();
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
@@ -163,26 +146,12 @@ const CrudStudents = () => {
     }));
     console.log(SavedData);
   };
-  //function that searches the database for data
-  /* const petitionGet=async()=>{
-   await axios.get(Database)
-    .then(response=>{
-      console.log(response.data)
-    })
-  }
-  useEffect(async()=>{
-   await petitionGet();
-  },[]) */
 
-  /*
-	
-
-*/
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
     Axios({
-      url: `${baseUrl}/api/students/control`,
+      url: `${baseUrl}/students`,
     })
       .then((response) => {
         setStudents(response.data);
@@ -192,31 +161,6 @@ const CrudStudents = () => {
         console.log(error);
       });
   }, [setStudents]);
-
-  //function that inserts data into the database
-
-  const petitionPost = async (e) => {
-    e.preventDefault();
-    try {
-      await Axios.post(`${baseUrl}/api/students-control-post`, {
-        gender: SavedData.gender,
-        actualAge: SavedData.actualAge,
-        name: SavedData.name,
-        middleName: SavedData.middleName,
-        lastName: SavedData.lastName,
-        secondSurname: SavedData.secondSurname,
-        email: SavedData.email,
-        password: SavedData.password,
-        contactNumber: SavedData.contactNumber,
-        role: SavedData.role,
-        cohorte: SavedData.cohorte,
-        program: SavedData.program,
-        estado: SavedData.estado,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   //one-button boolean function
   const openedClosedModalInsertar = () => {
@@ -856,27 +800,17 @@ const CrudStudents = () => {
               {students.map((e) => {
                 return (
                   <tr>
-                    <td>{e.user_id.id}</td>
-                    <td>{e.user_id.name + " " + e.user_id.middleName}</td>
-                    <td>
-                      {e.user_id.lastName + " " + e.user_id.secondSurname}
-                    </td>
-                    <td>{e.actualAge}</td>
+                    <td>{e.id}</td>
+                    <td>{e.name}</td>
+                    <td>{e.last_name}</td>
+                    <td>{e.birth_date}</td>
                     <td>{e.gender}</td>
-                    <td>{e.contactNumber}</td>
+                    <td>{e.phone}</td>
                     <td>{e.email}</td>
-                    <td>
-                      {e.interestsStudent[0] +
-                        " " +
-                        e.interestsStudent[1] +
-                        " " +
-                        e.interestsStudent[2]}
-                    </td>
-                    {/* <td>{e.user_id.program }</td> */}
-
+                    <td>{e.interest}</td>
                     <td>{e.program}</td>
-                    <td>{e.assignedMentor}</td>
-                    <td>{e.estado}</td>
+                    <td>{e.mentor}</td>
+                    <td>{e.active}</td>
                     <td>
                       <div className={styles.containerbutton}>
                         <button id={styles.update}>

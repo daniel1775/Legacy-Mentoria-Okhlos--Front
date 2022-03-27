@@ -1,184 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import {
-	dispatchGetUser,
-	dispatchLogin,
-	fetchUser,
-} from './redux/actions/authActions';
-import { Routes, Route } from 'react-router-dom';
-
-// components
-import Login from './components/login/Login.jsx';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import NavAdmin from './views/Administrator/NavAdmin/NavAdmin';
+import Login from './views/Login/Login';
 
 // import NotFound from './views/General/NotFound'
-import ForgotPassword from './components/login/ForgotPassword.jsx';
-import WelcomeUser from './views/Student/Welcome/WelcomeStudent.jsx';
-import WelcomeStudent from './views/Student/Welcome/WelcomeStudent';
-import StudentSession from './views/Student/SessionsBoard/SessionsBoard';
-import Thanks from './views/Student/Thanks/Thanks';
-import Navbar from './components/NavRes/NavRes';
 import Footer from './components/Footer/Footer';
-import FirstStudentForm from './views/Student/Form/FirstStudentForm';
-import FirstStudentInform from './views/Student/Inform/FirstStudentInform';
-import MultipleChoice from './views/Student/MultipleChoice/MultipleChoice';
-import WelcomeCard from './components/welcomeCard/WelcomeCard';
-import WelcomeAdmi from './views/Administrator/PanelAdmin/WelcomeAdmi';
-import PrincipalView from './views/Principal/PrincipalView';
 import MatchForm from './views/Administrator/Match/MatchForm';
-import AsignedSessions from './views/Mentor/AsignedSessions/AsignedSessions';
-import FormMentor from './views/Mentor/FormMentor';
-import FinalMessage from './views/Mentor/AsignedSessions/FinalMessage.jsx';
-import Calendar from './components/Calendar/calendar';
-import AssigmentSessionBoard from './views/Student/SessionsBoard/AssignmentSessionBoard';
-import WaitMessage from './components/Calendar/WaitMessage';
-import WelcomeMentor from './views/Mentor/Welcome';
 // Administrator imports of CRUDS //
 import CrudMentors from './views/Administrator/Cruds/CrudMentor/CrudMentor';
 import CrudStudents from './views/Administrator/Cruds/CrudStudents/CrudStudents';
 import CrudSessions from './views/Administrator/Cruds/CrudSessions/CrudSessions';
 import CrudSessionsDetail from './views/Administrator/Cruds/CrudSessionDetail/CrudSessionDetail';
-import MentorAssigned from './views/Student/MentroAssigned/MentorAssigned';
-import Welcome from './views/Mentor/Welcome';
+import { useEffect, useState } from 'react';
 
-// import WelcomeAdmin from './views/Administrator/PanelAdmin/WelcomeAdmi';
 function App() {
-	// it gives us the store's dispatch method as its result
-	const dispatch = useDispatch();
-	// save the token stored in the redux store
-	const token = useSelector((state) => state.token);
-	// save auth state stored in redux store
-	const auth = useSelector((state) => state.auth);
-	// save isLogged from auth
-	const { isLogged } = auth;
-	// this useState is used to see if the student has already filled the interests
-	const [interest, setInterest] = useState(false);
-	// url constant //
-	const baseUrl = 'https://fathomless-bastion-33135.herokuapp.com';
+	// role 3: Student
+	// role 2: Mentor
+	// role 1: Administrator
+	const [ role, setRole ] = useState(0);
+	let navigate = useNavigate();
 
 	useEffect(() => {
-		// collects the value of loggedOkhlosUser from localStorage
-		const loggedUserJSON = window.localStorage.getItem('loggedOkhlosUser');
-		// collects the value of firstLogin from localStorage
-		const firstLogin = localStorage.getItem('firstLogin');
-		// if firstLogin and loggedUserJSON exist run the following
-		if (firstLogin && loggedUserJSON) {
-			// convert received data to javascript object
-			const user = JSON.parse(loggedUserJSON);
-			// save the user's refresToken
-			const refreshtoken = user.refresh_token;
-			const getToken = async () => {
-				// send the refreshToken to the backend path
-				const res = await axios.post(`${baseUrl}/api/refresh_token`, {
-					refreshtoken,
-				});
-				// calls an action to trigger a state change
-				dispatch({ type: 'GET_TOKEN', payload: res.data.access_token });
-			};
-
-			// the getToken function is called
-			getToken();
+		if(role === 0){
+		}else if(role === 1){
+			window.location.href = "/administrator";
+			/* navigate("/administrator"); */
+		}else if(role === 2){
+			window.location.href = "/mentor";
+			/* navigate("/mentor"); */
+		}else if(role === 3){
+			window.location.href = "/student";
+			/* navigate("/student") */
 		}
-	}, [auth.isLogged, dispatch]);
-
-	useEffect(() => {
-		// check if the token exists
-		if (token) {
-			//
-			const getUser = () => {
-				//
-				dispatch(dispatchLogin());
-				return fetchUser(token).then((res) => {
-					dispatch(dispatchGetUser(res));
-				});
-			};
-			// the getUser function is called
-			getUser();
-		}
-	}, [token, dispatch]);
-
-	const idStudent = useSelector((state) => state.auth.user.id);
-
-	useEffect(() => {
-		if (idStudent) {
-			axios.get(`${baseUrl}/api/student-interest/${idStudent}`).then((res) => {
-				const interest = res.data;
-				// console.log(interest)
-				if (interest[0].interestsStudent.length > 0) {
-					setInterest(true);
-				}
-			});
-		}
-	}, [idStudent, auth.isLogged]);
+	}, [navigate, role]);
 
 	return (
 		<>
-			{/* <Navbar /> */}
 			<NavAdmin />
 			<Routes>
-        {/* administrador */}
-				<Route path="/" element={/* isLogged ? <StudentSession /> :  */<Login />} exact/>
-				<Route path="/forgot_password" element={/* isLogged ? <WelcomeUser /> : */ <ForgotPassword />} exact/>
-        {/* este es el welcome repetido de mentor (cambiado por welcomeadmi)*/}
-        <Route path="/welcome-user"
-					element={/* interest ? <Thanks /> : <MultipleChoice /> */ <WelcomeAdmi/> }
-				/>
-				{/* others */}
-				<Route path="/principal-view" element={<PrincipalView />} />
+				{/* Login's routes */}
+				<Route path="/" element={<Login setRole={setRole}/>} />
 
-				<Route path="/welcome-user"
-					element={<MultipleChoice />}
-				/>
-				{/* <Route path="/welcome-user"
-					element={interest ? <Thanks /> : <MultipleChoice />}
-				/> */}
-				{/* aqui deberia estar el home */}
-        
-				<Route path="/thanks-student" element={<Thanks />} />
-				<Route path="/mentor-assigned" element={<MentorAssigned/>}/>
-
-				<Route path="/welcome-student" element={<WelcomeStudent />} />
-				<Route path="/calendar/:id" element={<Calendar />} />
-				<Route path="/form-student/:id" element={<FirstStudentForm />} />
-
-				
-				<Route path="/WelcomeCard" element={<WelcomeCard />} />
-
-
-
-				{/* <Route path="/thanks-student" element={<Thanks/>}/> */}
-				<Route path="/inform-student/:id" element={<FirstStudentInform />} />
-				<Route path="/student-sessions" element={<StudentSession />} />
-				<Route
-					path="/student-assignment-sessions"
-					element={<AssigmentSessionBoard />}
-				/>
-				<Route path="/MultipleChoice" element={<MultipleChoice />} />
-
+				{/* Administrator's routes */}
+				<Route path="/administrator" element={<MatchForm />} />
 				<Route path="/MatchForm" element={<MatchForm />} />
-				<Route path="/AsignedSessions" element={<AsignedSessions />} />
-				<Route path="/welcome-mentor" element={<WelcomeMentor />} />
-				<Route path="/FormMentor" element={<FormMentor />} />
-				<Route path="/FinalMessage" element={<FinalMessage />} />
-				<Route path="/WaitMessage" element={<WaitMessage />} />
-
 				<Route path="/CrudStudents" element={<CrudStudents />} />
 				<Route path="/crud-mentors" element={<CrudMentors />} />
 				<Route path="/crud-sessions-detail" element={<CrudSessionsDetail />} />
 				<Route path="/crud-sessions" element={<CrudSessions />} />
 
-				<Route
-					path="*"
-					element={
-						<main style={{ padding: '1rem' }}>
-							<p>There's nothing here!</p>
-						</main>
-					}
-				/>
-			</Routes>
+				{/* Student's routes */}
+				<Route path="/student" element={<CrudSessions />} />
 
+				{/* Mentor's routes */}
+				<Route path="/mentor" element={<CrudMentors />} />
+
+			</Routes>
 			<Footer />
 		</>
 	);

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEdit, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, TextField } from '@material-ui/core';
-import axios from 'axios';
+import Axios from 'axios';
 
 import Swal from 'sweetalert2';
 import zIndex from '@material-ui/core/styles/zIndex';
@@ -92,7 +92,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CrudSessions = () => {
-	const [data, setData] = useState([]);
 	const Styles = useStyles();
 	const [modalinsertar, setmodalinsertar] = useState(false);
 	const [modaleditar, setmodaleditar] = useState(false);
@@ -109,6 +108,9 @@ const CrudSessions = () => {
 		Empresa: '',
 		AsignaciónEst: '',
 	});
+
+	const baseUrl = "http://localhost:3001";
+
 	//Function to insert the data written in the module.
 	const InsertData = (e) => {
 		const { name, value } = e.target;
@@ -118,29 +120,21 @@ const CrudSessions = () => {
 		}));
 		console.log(SavedData);
 	};
-	//function that searches the database for data
-	/*const petitionGet=async()=>{
- await axios.get(Database)
-  .then(response=>{
-    console.log(response.data)
-  })
-}
-useEffect(async()=>{
- await petitionGet();
-},[])
 
+	const [sessions, setSessions] = useState([]);
 
-
-//function that inserts data into the database
-
-/*const petitionPost=async()=>{
-  await axios.post(Database,SavedData)
-  .then(response=>{
-    setData(data.concat(response.data),
-    openedClosedModalInsertar()
-  )
-  })
-}*/
+  useEffect(() => {
+    Axios({
+      url: `${baseUrl}/sessions`,
+    })
+      .then((response) => {
+        setSessions(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [setSessions]);
 
 	//one-button boolean function
 	const openedClosedModalInsertar = () => {
@@ -375,14 +369,14 @@ useEffect(async()=>{
 
 					</thead>
 					<tbody>
-				{Database.map((e) => {
+				{sessions.map((e) => {
 					return (
 						<tr>
-							<td>{e.Titulo}</td>
-							<td >{e.Fechadeinicio}</td>
-							<td >{e.Fechadefinalizacion}</td>
-							<td > {e.Descripcion}</td>
-							<td >{e.Estado}</td>
+							<td>{e.title}</td>
+							<td >{e.start_date}</td>
+							<td >{e.end_date}</td>
+							<td > {e.description}</td>
+							<td >{e.state}</td>
 
 							<>
 								<td>

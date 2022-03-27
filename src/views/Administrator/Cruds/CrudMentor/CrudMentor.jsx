@@ -23,94 +23,10 @@ const Articles = [
     Programa: "Programa ",
     Carrera: " Carrera  ",
     Empresa: " Empresa  ",
-    AsignaciónEst: "Asignación Est",
+    AsignaciónEst: "Cargo/empleo",
     estado: "Estado",
   },
 ];
-//Table data
-const Database = [
-  {
-    Id: "id",
-    Nombres: "Nombres",
-    Apellidos: "Apellidos",
-    Edad: "Edad",
-    Género: "Género",
-    Teléfono: "Teléfono",
-    Email: "Email",
-    Intereses: "Intereses ",
-    Programa: "Programa ",
-    Carrera: " Carrera  ",
-    Empresa: " Empresa  ",
-    AsignaciónEst: "Asignación Est",
-    estado: "Estado",
-  },
-  {
-    Id: "id",
-    Nombres: "Nombres",
-    Apellidos: "Apellidos",
-    Edad: "Edad",
-    Género: "Género",
-    Intereses: "Intereses ",
-    Programa: "Programa ",
-    Carrera: " Carrera  ",
-    Empresa: " Empresa  ",
-    AsignaciónEst: "Asignación Est",
-    estado: "Estado",
-  },
-  {
-    Id: "id",
-    Nombres: "Nombres",
-    Apellidos: "Apellidos",
-    Edad: "Edad",
-    Género: "Género",
-    Intereses: "Intereses ",
-    Programa: "Programa ",
-    Carrera: " Carrera  ",
-    Empresa: " Empresa  ",
-    AsignaciónEst: "Asignación Est",
-    estado: "Estado",
-  },
-  {
-    Id: "id",
-    Nombres: "Nombres",
-    Apellidos: "Apellidos",
-    Edad: "Edad",
-    Género: "Género",
-    Intereses: "Intereses ",
-    Programa: "Programa ",
-    Carrera: " Carrera  ",
-    Empresa: " Empresa  ",
-    AsignaciónEst: "Asignación Est",
-    estado: "Estado",
-  },
-  {
-    Id: "id",
-    Nombres: "Nombres",
-    Apellidos: "Apellidos",
-    Edad: "Edad",
-    Género: "Género",
-    Intereses: "Intereses ",
-    Programa: "Programa ",
-    Carrera: " Carrera  ",
-    Empresa: " Empresa  ",
-    AsignaciónEst: "Lorem  vitae.",
-    estado: "Estado",
-  },
-  {
-    Id: "id",
-    Nombres: "Nombres",
-    Apellidos: "Apellidos",
-    Edad: "Edad",
-    Género: "Género",
-    Intereses: "Intereses ",
-    Programa: "Programa ",
-    Carrera: " Carrera  ",
-    Empresa: " Empresa  ",
-    AsignaciónEst: "Lorem  vitae.",
-    estado: "Estado",
-  },
-];
-
 //Alert delete
 
 const Alertdelete = () => {
@@ -215,7 +131,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CrudMentor = () => {
-  const [data, setData] = useState([]);
   const Styles = useStyles();
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
@@ -247,20 +162,20 @@ const CrudMentor = () => {
   };
 
   //function that inserts data into the database
-  const [students, setStudents] = useState([]);
+  const [mentors, setMentors] = useState([]);
 
   useEffect(() => {
     Axios({
-      url: `${baseUrl}/api/mentorViewStudent`,
+      url: `${baseUrl}/mentors`,
     })
       .then((response) => {
-        setStudents(response.data);
+        setMentors(response.data);
         console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [setStudents]);
+  }, [setMentors]);
 
   /*const petitionPost=async()=>{
   await axios.post(Database,SavedData)
@@ -889,22 +804,22 @@ const CrudMentor = () => {
             })}
           </thead>
           <tbody>
-            {Database.map((e) => {
+            {mentors.map((e) => {
               return (
                 <tr>
-                  <td>{e.Id}</td>
-                  <td>{e.Nombres}</td>
-                  <td> {e.Apellidos}</td>
-                  <td>{e.Edad}</td>
-                  <td>{e.Género}</td>
-                  <td>{e.Teléfono}</td>
-                  <td>{e.Email}</td>
-                  <td>{e.Intereses}</td>
-                  <td>{e.Programa}</td>
-                  <td>{e.Carrera}</td>
-                  <td>{e.Empresa}</td>
-                  <td>{e.AsignaciónEst}</td>
-                  <td>{e.estado}</td>
+                  <td>{e.id}</td>
+                  <td>{e.name}</td>
+                  <td> {e.last_name}</td>
+                  <td>{e.birth_date}</td>
+                  <td>{e.gender}</td>
+                  <td>{e.phone}</td>
+                  <td>{e.email}</td>
+                  <td>{e.interest}</td>
+                  <td>{e.program}</td>
+                  <td>{e.studies}</td>
+                  <td>{e.business}</td>
+                  <td>{e.role}</td>
+                  <td>{e.active}</td>
                   <td>
                     <div className={styles.containerbutton}>
                       <button

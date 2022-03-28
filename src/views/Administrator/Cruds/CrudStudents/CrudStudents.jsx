@@ -6,6 +6,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Modal, TextField } from "@material-ui/core";
 import Axios from "axios";
 import Swal from "sweetalert2";
+import "bootstrap/dist/css/bootstrap.min.css";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+
+
 
 const Alertdelete = () => {
   Swal.fire({
@@ -796,12 +800,22 @@ const CrudStudents = () => {
             Insertar Estudiante
           </button>
 
-          <button>Insertar CVS</button>
-          <button>Descargar CVS</button>
+          
+        <ReactHTMLTableToExcel
+          id="test-table-xls-button"
+          className="download-table-xls-button"
+          table="tableStudent"
+          filename="Tabla Estudiantes"
+          sheet="pagina 1"
+          buttonText="Descargar CSV"
+        />
+        
+          <button >Insertar CSV</button>
+          {/* <button >Descargar CVS</button> */}
         </div>
 
         <div class={styles.containerTable}>
-          <table className={styles.table}>
+          <table className={styles.table} id="tableStudent">
             <thead>
               {
                 <tr>

@@ -17,7 +17,7 @@ const MatchForm = () => {
   const [match, setMatch] = useState([])
   const [cohort, setCohort] = useState(0);
 
-  const baseUrl = 'http://localhost:3001'
+  const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
   // almacena el valor escogido en la seccion de cohorte (corregir)
   const handleTypeSelect = e => {

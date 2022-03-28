@@ -10,6 +10,7 @@ import MatchForm from './views/Administrator/Match/MatchForm';
 import CrudMentors from './views/Administrator/Cruds/CrudMentor/CrudMentor';
 import CrudStudents from './views/Administrator/Cruds/CrudStudents/CrudStudents';
 import CrudSessions from './views/Administrator/Cruds/CrudSessions/CrudSessions';
+import WelcomeCard from './components/welcomeCard/WelcomeCard';
 import CrudSessionsDetail from './views/Administrator/Cruds/CrudSessionDetail/CrudSessionDetail';
 import { useEffect, useState } from 'react';
 
@@ -51,6 +52,7 @@ function App() {
 
 				{/* Student's routes */}
 				<Route path="/student" element={<CrudSessions />} />
+				<Route path="/student/welcomeCard" element={<WelcomeCard />} />
 
 				{/* Mentor's routes */}
 				<Route path="/mentor" element={<CrudMentors />} />

@@ -1,6 +1,5 @@
 import style from "./Cohort.module.css";
 import Select from "react-select";
-import NavAdmin from "../../../NavAdmin/NavAdmin";
 
 export default function Cohort(props) {
   const { handleTypeSelect, getValuesFinal } = props;

@@ -39,6 +39,7 @@ export default function NavAdmin(){
           <li><Link to='/crud-mentors' onClick={() => setShow(false)}>MENTORES</Link><hr /></li>
           <li><Link to='/crud-sessions' onClick={() => setShow(false)}>SESIONES</Link><hr /></li>
           <li><Link to='/MatchForm' onClick={() => setShow(false)}>MATCH</Link><hr /></li>
+          <li><Link to='/FormMentor' onClick={() => setShow(false)}>INTERESES</Link><hr /></li>
           <li className={style.logoutIcon}>
             <Link to='/' onClick={() => {setShow(false);handleLogout()}}>
               <HiOutlineLogout />

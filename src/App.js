@@ -12,6 +12,7 @@ import CrudStudents from './views/Administrator/Cruds/CrudStudents/CrudStudents'
 import CrudSessions from './views/Administrator/Cruds/CrudSessions/CrudSessions';
 import CrudSessionsDetail from './views/Administrator/Cruds/CrudSessionDetail/CrudSessionDetail';
 import { useEffect, useState } from 'react';
+import FormMentor from './views/Mentor/FormMentor';
 
 function App() {
 	// role 3: Student
@@ -48,12 +49,15 @@ function App() {
 				<Route path="/crud-mentors" element={<CrudMentors />} />
 				<Route path="/crud-sessions-detail" element={<CrudSessionsDetail />} />
 				<Route path="/crud-sessions" element={<CrudSessions />} />
+				<Route path="/FormMentor" element={<FormMentor/>} />
+			
 
 				{/* Student's routes */}
 				<Route path="/student" element={<CrudSessions />} />
 
 				{/* Mentor's routes */}
 				<Route path="/mentor" element={<CrudMentors />} />
+			
 
 			</Routes>
 			<Footer />

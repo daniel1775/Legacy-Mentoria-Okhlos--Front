@@ -89,10 +89,11 @@ function FormMentor () {
   }
 
   return (
-    <div className='container-Q'>
+    <div className={'container-Q'}>
+      <div className="parrafo">Completa la siguiente información de tu perfil para avanzar en la plataforma</div>
       <form className='form-mentor' onSubmit={handleUpdateInterest}>
         <div className='containerList'>
-          <label className='mg-bottom'>Estudios</label>
+          <div className="columna1"><label className='mg-bottom'>Estudios</label>
           <input
             onChange={handleChangeInput}
             className='mg-bottom'
@@ -113,13 +114,16 @@ function FormMentor () {
             name='Company'
             required
           ></input>
-          <label className='mg-bottom'>Edad</label>
-          <input
+          <label className='mg-bottom' >Fecha de nacimiento</label>
+          <input type="date"
             onChange={handleChangeInput}
             className='mg-bottom'
             name='actualAge'
             required
-          ></input>
+          ></input></div>
+          
+
+          <div className="columna2">
           <label className='mg-bottom'>Género</label>
           <select
             onChange={handleChangeInput}
@@ -136,27 +140,45 @@ function FormMentor () {
           className="mg-bottom" 
           name=""></input> */}
           <label className='mg-bottom'>Hijos</label>
-          <input
+          <select
             onChange={handleChangeInput}
             className='mg-bottom'
             name='sons'
             required
-          ></input>
 
-          <label className='mg-bottom'>
-            Cantidad de estudiantes que quieres en el proceso
-          </label>
-          <input
+          >
+
+            <option value='4'>1</option>
+            <option value='5'>2</option>
+            <option value='6'>3</option>
+            <option value='7'>4</option>
+            <option value='8'>5</option>
+            <option value='9'>6</option>
+
+
+          </select>
+
+          <label className='mg-bottom'>Cantidad de estudiantes que quieres en el proceso</label>
+          <select
             onChange={handleChangeInput}
-            className='mg-bottom'
             name='numeStudents'
+            className='mg-bottom'
             required
-          ></input>
-        </div>
+          >
+            <option value='10'>1</option>
+            <option value='11'>2</option>
+            <option value='12'>3</option>
 
+          </select>
+          </div>
+          </div>
+          
+
+          <div className="payment">
         <Card
           container={
             <>
+            
               <h3>Intereses generales</h3>
               <p>Elige máximo tres intereses</p>
 
@@ -173,17 +195,21 @@ function FormMentor () {
                     : 'No options available'
                 }}
               />
-
+                      <button className='button-formMentor' type='submit'>
+          Enviar
+        </button>
+            
               <br />
             </>
           }
         />
-        <button className='button-formMentor' type='submit'>
-          Enviar
-        </button>
+        </div>
       </form>
+      
     </div>
+    
   )
+  
 }
 
 export default FormMentor

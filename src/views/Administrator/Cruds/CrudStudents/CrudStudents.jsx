@@ -120,6 +120,9 @@ const CrudStudents = () => {
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
   const [modalver, setmodalver] = useState(false);
+
+  const [ dataModalInsertar, setDataModalInsertar ] = useState([]);
+
   //Insert saved module data
   const [SavedData, setSavedData] = useState({
     name: "",
@@ -135,8 +138,13 @@ const CrudStudents = () => {
     role: 1,
     estado: "",
   });
+
+  useEffect(() => {
+    console.log("SAVEDDATA: "+ SavedData.gender);
+  }, [SavedData]);
+
   //base Url of deploy
-  const baseUrl = process.env.REACT_APP_BACKEND_URL;
+  const baseUrl = "https://mentoringapp-back.herokuapp.com";
   //Function to insert the data written in the module.
   const InsertData = (e) => {
     const { name, value } = e.target;
@@ -344,7 +352,7 @@ const CrudStudents = () => {
           className="form-control"
           name="estado"
           onChange={InsertData}
-          value={SavedData && SavedData.MentorAssignment}
+          value={SavedData && SavedData.gender}
           aria-label="Default select example"
         >
           <option value="0" selected="">
@@ -358,7 +366,7 @@ const CrudStudents = () => {
 
       <br />
       <div align="center">
-        <button className={Styles.Button} onClick={()=>Alertcreate() &  openedClosedModalInsertar() } /* onClick={petitionPost} */>
+        <button className={Styles.Button} onClick={() => {/*Alertcreate();openedClosedModalInsertar();*/handleModalInsert()}}>
           Insertar
         </button>
         <button
@@ -370,6 +378,22 @@ const CrudStudents = () => {
       </div>
     </div>
   );
+
+  // Insert Function in Backend
+  async function handleModalInsert(){
+    try{
+      await Axios.post(`${baseUrl}/student`, {
+        name: SavedData.name + SavedData.middleName,
+        last_name: SavedData.lastName + SavedData.secondSurname,
+        birth_date: SavedData.actualAge,
+        cohort: SavedData.cohorte,
+        phone: SavedData.contactNumber,
+        active: 1
+      })
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   //Modal structure Editar
 

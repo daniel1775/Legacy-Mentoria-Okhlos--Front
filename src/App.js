@@ -12,6 +12,10 @@ import CrudStudents from './views/Administrator/Cruds/CrudStudents/CrudStudents'
 import CrudSessions from './views/Administrator/Cruds/CrudSessions/CrudSessions';
 import CrudSessionsDetail from './views/Administrator/Cruds/CrudSessionDetail/CrudSessionDetail';
 import { useEffect, useState } from 'react';
+//student imports components
+import MultipleChoice from './views/Student/MultipleChoice/MultipleChoice.jsx';
+import Thanks from './views/Student/Thanks/Thanks.jsx'
+import MentorAssigned from './views/Student/MentorAssigned/MentorAssigned.jsx';
 
 function App() {
 	// role 3: Student
@@ -51,6 +55,9 @@ function App() {
 
 				{/* Student's routes */}
 				<Route path="/student" element={<CrudSessions />} />
+				<Route path="/student/select-studentInterests" element={<MultipleChoice/>} />
+				<Route path="/student/thanks-studentsView" element={<Thanks/>} />
+				<Route path="/student/mentor-assigned-studentsView" element={<MentorAssigned/>} />
 
 				{/* Mentor's routes */}
 				<Route path="/mentor" element={<CrudMentors />} />

@@ -18,35 +18,53 @@
     background-color: #fff;
 }
 .containerAssigned{
-    height: 40vh;
+    /* height: 40vh; */
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin-top: 7vh;
     margin-bottom: 7vh;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 5px -1px rgb(68, 68, 68);
+    /* box-shadow: 0 4px 5px -1px rgb(68, 68, 68); */
 }
 .profileAssigned{
-    width: 35rem;
-    border-top: 0.5vh solid #F1F1F1;
-    border-radius: 0.5rem;
+    /* width: 35rem; */
+    border-top: 0.5vh solid #fff;
+    border-radius: 0.5rem 0 0 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
     background-color: #FFCC02;
-    clip-path: polygon(0% 0, 100% 0%, 92% 100%, 0% 100%);
+    clip-path: polygon(0% 0, 100% 0%, 93% 100%, 0% 100%);
+}
+.profileImgAssigned{
+    /* width: 12rem;
+    height: 30vh; */
+    width: 100%;
+    height: 100%;
+}
+.assignedIcons{
+    cursor: pointer;
+    font-size: 2rem;
+}
+.iconsProfileAssigned{
+    display: flex;
+    margin-top: 1rem;
+    column-gap: 2rem;
 }
 .nameAssigned{
-    width: 35rem;
-    border-top: 0.5vh solid #F1F1F1;
-    border-radius: 0.5rem;
+    /* width: 35rem; */
+    border-top: 0.5vh solid #fff;
+    border-radius: 0 0.5rem 0.5rem 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 1.5rem;
     background-color: #FFCC02;
-    clip-path: polygon(7.3% 0, 100% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(10% 0, 100% 0%, 100% 100%, 0% 100%);
     
 }
 .containerSession{

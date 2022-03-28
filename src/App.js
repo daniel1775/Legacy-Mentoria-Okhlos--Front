@@ -56,13 +56,10 @@ function App() {
 
 				{/* Student's routes */}
 				<Route path="/student" element={<CrudSessions />} />
-<<<<<<< HEAD
 				<Route path="/student/select-studentInterests" element={<MultipleChoice/>} />
 				<Route path="/student/thanks-studentsView" element={<Thanks/>} />
 				<Route path="/student/mentor-assigned-studentsView" element={<MentorAssigned/>} />
-=======
 				<Route path="/student/welcomeCard" element={<WelcomeCard />} />
->>>>>>> 66cc92432039cc21758f2bc56aa718d5fc116696
 
 				{/* Mentor's routes */}
 				<Route path="/mentor" element={<CrudMentors />} />

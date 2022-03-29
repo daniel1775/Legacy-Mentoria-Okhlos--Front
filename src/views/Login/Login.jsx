@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default function Login(props) {
 	const { setRole } = props;
-	const backendUrl = process.env.REACT_APP_BACKEND_URL;
+	const baseurl = process.env.REACT_APP_BACKEND_URL;
 
 	const [ email, setEmail ] = useState("");
 	const [ password, setPassword ] = useState("");
@@ -13,7 +13,7 @@ export default function Login(props) {
 	async function sendLogin(e){
 		e.preventDefault();
 		try{
-			await axios.get(`${backendUrl}/login/${email}/${password}`)
+			await axios.get(`${baseurl}/login/${email}/${password}`)
 				.then(response => {
 					setRole(response.data[0].role);
 				});

@@ -6,44 +6,43 @@ import ListStudentMentor from './components/ListStudentMentor/ListStudentMentor'
 import Cohort from './components/Cohort/Cohort';
 
 const MatchForm = () => {
-  let program = "Programate";
+  const [program, setProgram] = useState(200)
   const [students, setStudents] = useState([])
   const [mentors, setMentors] = useState([])
   // permite controlar que componente se va a renderizar: <ListStudentMentor/> ó <ProgramAndCohort/>
-  const [chosenProgram, setChosenProgram] = useState(false)
-  // almacena true si el match se realizo con éxito
-  const [done, setDone] = useState(false)
+  const [showViewCohort, setShowViewCohort] = useState(true)
   // almacena los datos de estudiantes y mentores una vez realizado el match
   const [match, setMatch] = useState([])
-  const [cohort, setCohort] = useState(0);
+  const [cohort, setCohort] = useState(3);
+  const [ showSelectCohort, setShowSelectCohort ] = useState(true);
 
-  const baseUrl = 'http://localhost:3001'
+  const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
   // almacena el valor escogido en la seccion de cohorte (corregir)
-  const handleTypeSelect = e => {
-    setCohort(e.label) 
+  const handleTypeSelectCohort = e => {
+    setCohort(e.value) 
   };
 
-  const getValuesFinal = async () => {
-    try {
-      const res = await axios.get(`${baseUrl}/api/match/students/${program}/${cohort}`)
-      if (res.status === 200) {
-        setStudents(res.data)
-      }
-    } catch (err) {
-      console.log(err)
-    }
-    getValuesMentor()
-  }
+  const handleTypeSelectProgram = e => {
+    setProgram(e.value) 
+  };  
 
-  // En esta funcion se consultan los mentores
-  const getValuesMentor = async () => {
+  const getValuesFinal = async () => {
+    setShowViewCohort(false);
+    console.log(cohort)
+    console.log(program)
     try {
-      const resp = await axios.get(`${baseUrl}/api/match/mentor/${program}/${cohort}`)
-      if (resp.status === 200) {
-        setChosenProgram(true)
-        setMentors(resp.data)
-      }
+      await axios.get(`${baseUrl}/match/${cohort}/${program}`)
+      .then(response => {
+        console.log("DATA" + JSON.stringify(response.data));
+        setMatch(response.data);
+      });
+      /* showSelectCohort ? res = await axios.get(`${baseUrl}/match/${cohort}/${program}`) 
+      : res = await axios.get(`${baseUrl}/match/${program}`) */
+      /* if (res.status === 200) {
+        console.log("RES: " + JSON.stringify(res.data));
+        setMatch(res.data)
+      } */
     } catch (err) {
       console.log(err)
     }
@@ -158,23 +157,22 @@ const MatchForm = () => {
         nameMentor: findHighScore(possibleMentors)
       }]);
     }
-    setDone(true)
   }
 
   return (
     <div>
-      {chosenProgram ? 
-      <ListStudentMentor 
-        students={students}
-        mentors={mentors}
-        done={done}
-        match={match}
-        calculateMatch={calculateMatch}
-      /> : 
-      <Cohort
-        handleTypeSelect={handleTypeSelect}
-        getValuesFinal={getValuesFinal}
-      />}
+      {showViewCohort ? 
+        <Cohort
+          handleTypeSelectCohort={handleTypeSelectCohort}
+          handleTypeSelectProgram={handleTypeSelectProgram}
+          getValuesFinal={getValuesFinal}
+          showSelectCohort={showSelectCohort}
+          setShowSelectCohort={setShowSelectCohort}
+        /> : 
+        <ListStudentMentor
+          match={match}
+        />
+      }
     </div>
   )
 }

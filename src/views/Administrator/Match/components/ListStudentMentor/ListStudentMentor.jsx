@@ -3,15 +3,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { faEdit, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
-
 export default function ListStudentMentor(props) {
-  const { match } = props;
+  const { match, cohort, program } = props;
 
   return (
     <div className={style.container}>
       <div>
-        <h2>Match Estudiante Mentor</h2>
+        <h2>
+          Match
+          <br/>
+          {`Programa: ${program === 200 ? 'Bootcamp Prográmate' : 'Administración de empresas'} `}
+          <br/>
+          {`${program === 200 ? 'Cohorte: ' + cohort : ''} `}
+        </h2>
         <div class={style.containerTable}>
           <table className={style.table}>
             <thead>
@@ -22,6 +26,7 @@ export default function ListStudentMentor(props) {
                 <th>Nombres Mentor</th>
                 <th>Apellidos Mentor</th>
                 <th>Media</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -34,6 +39,7 @@ export default function ListStudentMentor(props) {
                     <td>{e.last_name_student}</td>
                     <td>{e.name_mentor}</td>
                     <td>{e.last_name_mentor}</td>
+                    <td>{e.score}</td>
                     <td>
                       <div className={style.containerbuttonactions}>
                         <button

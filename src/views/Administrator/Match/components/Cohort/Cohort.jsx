@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 export default function Cohort(props) {
   const { handleTypeSelectCohort, handleTypeSelectProgram, getValuesFinal, showSelectCohort, setShowSelectCohort } = props;
-  
 
   const cohorte = [
     {

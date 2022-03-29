@@ -4,8 +4,7 @@
   margin-top: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Roboto, sans-serif;
-  font-size: 20px;
+
   }
 .containerHomeSession {
   width: 100%;
@@ -14,6 +13,8 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
 }
 
 .welcomeMentor {

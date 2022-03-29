@@ -122,6 +122,9 @@ const CrudStudents = () => {
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
   const [modalver, setmodalver] = useState(false);
+
+  const [dataModalInsertar, setDataModalInsertar] = useState([]);
+
   //Insert saved module data
   const [SavedData, setSavedData] = useState({
     name: "",
@@ -137,8 +140,13 @@ const CrudStudents = () => {
     role: 1,
     estado: 1,
   });
+
+  useEffect(() => {
+    console.log("SAVEDDATA: " + SavedData.gender);
+  }, [SavedData]);
+
   //base Url of deploy
-  const baseUrl = process.env.REACT_APP_BACKEND_URL;
+  const baseUrl = "https://mentoringapp-back.herokuapp.com";
   //Function to insert the data written in the module.
   const InsertData = (e) => {
     const { name, value } = e.target;
@@ -279,12 +287,12 @@ const CrudStudents = () => {
             onChange={InsertData}
             value={SavedData && SavedData.email}
           />
-          <br />
         </div>
       </div>
       <div className="row ">
         <div className="form-group col-md-6">
           <TextField
+            type="number"
             name="contactNumber"
             className={Styles.inputMaterial}
             label="Celular"
@@ -344,9 +352,9 @@ const CrudStudents = () => {
       <div align="center">
         <button
           className={Styles.Button}
-          onClick={() =>
-            Alertcreate() & openedClosedModalInsertar()
-          } /* onClick={petitionPost} */
+          onClick={() => {
+            Alertcreate();openedClosedModalInsertar(); handleModalInsert();
+          }}
         >
           Insertar
         </button>
@@ -359,6 +367,22 @@ const CrudStudents = () => {
       </div>
     </div>
   );
+
+  // Insert Function in Backend
+  async function handleModalInsert() {
+    try {
+      await Axios.post(`${baseUrl}/student`, {
+        name: SavedData.name + SavedData.middleName,
+        last_name: SavedData.lastName + SavedData.secondSurname,
+        birth_date: SavedData.actualAge,
+        cohort: SavedData.cohorte,
+        phone: SavedData.contactNumber,
+        active: 1,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   //Modal structure Editar
 
@@ -468,6 +492,7 @@ const CrudStudents = () => {
       <div className="row ">
         <div className="form-group col-md-6">
           <TextField
+            type="number"
             name="contactNumber"
             className={Styles.inputMaterial}
             label="Celular"
@@ -644,12 +669,12 @@ const CrudStudents = () => {
             onChange={InsertData}
             value={SavedData && SavedData.email}
           />
-          <br />
         </div>
       </div>
       <div className="row ">
         <div className="form-group col-md-6">
           <TextField
+            type="number"
             name="contactNumber"
             className={Styles.inputMaterial}
             label="Celular"

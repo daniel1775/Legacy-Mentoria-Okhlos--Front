@@ -8,7 +8,7 @@ import { Modal, TextField } from '@material-ui/core';
 import Axios from 'axios';
 
 import Swal from 'sweetalert2';
-import zIndex from '@material-ui/core/styles/zIndex';
+
 
 
 const Articles=[{
@@ -19,43 +19,6 @@ const Articles=[{
   Estado:"Estado",
   
 }]
-/* toca conectar esto con la base de datos */
-const Database=[{
-	Titulo:"Titulo",
-	Fechadeinicio:"Fecha de inicio",
-  Fechadefinalizacion:"Fecha de finalizacion",
-	Descripcion:"Descripcion",
-	Estado:"Estado",
-},
-{
-	Titulo:"Titulo" ,
-	Fechadeinicio:"Fecha de inicio",
-  Fechadefinalizacion:"Fecha de finalizacion",
-	Descripcion:"Descripcion",
-	Estado:"Estado",
-},
-{
-	Titulo:"Titulo" ,
-	Fechadeinicio:"Fecha de inicio",
-  Fechadefinalizacion:"Fecha de finalizacion",
-	Descripcion:"Descripcion",
-	Estado:"Estado",
-},
-{
-	Titulo:"Titulo" ,
-	Fechadeinicio:"Fecha de inicio",
-  Fechadefinalizacion:"Fecha de finalizacion",
-	Descripcion:"Descripcion",
-	Estado:"Estado",
-},
-{
-	Titulo:"Titulo" ,
-	Fechadeinicio:"Fecha de inicio",
-  Fechadefinalizacion:"Fecha de finalizacion",
-	Descripcion:"Descripcion",
-	Estado:"Estado",
-}
-]
 
 
 //Modal styles 
@@ -97,17 +60,17 @@ const CrudSessions = () => {
 	const [modaleditar, setmodaleditar] = useState(false);
 	//Insert saved module data
 	const [SavedData, setSavedData] = useState({
-		id: '',
-		Nombres: '',
-		Apellidos: '',
-		Edad: '',
-		Género: '',
-		Intereses: '',
-		Programa: '',
-		Carrera: '',
-		Empresa: '',
-		AsignaciónEst: '',
+		title: '',
+		start_date: '',
+		end_date: '',
+		description: '',
+		state: 1,
+		
 	});
+
+	useEffect(() => {
+		/* console.log("SAVEDDATA: " + SavedData.gender); */
+	  }, [SavedData]);
 
 	const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -144,6 +107,7 @@ const CrudSessions = () => {
 	const openedClosedModalEditar = () => {
 		setmodaleditar(!modaleditar);
 	};
+	
 
 	//---------------------------------------alert from add--------------------------------------------------
 	const alertAdd= () => {
@@ -214,46 +178,39 @@ const CrudSessions = () => {
 		<div className={styles.modal}>
 			<h3 className={styles.h3}>AÑADIR UNA SESION</h3>
 			<TextField
-				name="Titulo"
+				name="title"
 				className={Styles.inputMaterial}
 				label="Titulo"
 				onChange={InsertData}
-				value={SavedData && SavedData.Titulo}
+				value={SavedData && SavedData.title}
 			/>
 			<br />
 			<TextField
 			    type="date"
-				name="Fecha de inicio"
+				name="start_date"
 				className={Styles.inputMaterial}
 				label="Fecha de inicio"
 				onChange={InsertData}
-				value={SavedData && SavedData.Fechadeinicio}
+				value={SavedData && SavedData.start_date}
 			/>
 			<br />
 			<TextField
 			    type="date"
-				name="Fecha de finalizacion"
+				name="end_date"
 				className={Styles.inputMaterial}
-				label="Fecha de finalización"
+				label="Fecha de finalización"e
 				onChange={InsertData}
-				value={SavedData && SavedData.Fechadefinalizacion}
+				value={SavedData && SavedData.end_date}
 			/>
-			<br />
 			<TextField
-				name="Descripcion"
+				name="description"
 				className={Styles.inputMaterial}
 				label="Descripción"
 				onChange={InsertData}
-				value={SavedData && SavedData.Descripcion}
+				value={SavedData && SavedData.description}
 			/>
 			<br />
-			{/* <TextField
-				name="Género"
-				className={Styles.inputMaterial}
-				label="Estado"
-				onChange={InsertData}
-				value={SavedData && SavedData.Nombres}
-			/> */}
+			
 			<br />
 			<select type='text'>
 			    <option value="0">Estado</option>
@@ -263,7 +220,9 @@ const CrudSessions = () => {
 			</select>
 			<br />
 			<div align="center" >
-				<button className={styles.button} onClick={() => alertAdd() & openedClosedModalInsertar()}/* onClick={()=>petitionPost()}*/>
+				<button className={styles.button} 
+				 onClick={() =>{
+				  alertAdd(); openedClosedModalInsertar(); handleModalInsert()}}/* onClick={()=>petitionPost()}*/>
 					Insertar
 				</button>
 				<button
@@ -275,6 +234,22 @@ const CrudSessions = () => {
 			</div>
 		</div>
 	);
+
+	async function handleModalInsert() {
+		try {
+		  await Axios.post(`${baseUrl}/sessions`, {
+			title: SavedData.titulo,
+			start_date:  SavedData.fechadeInicio,
+			end_date: SavedData.fechadeFinalizacion,
+			description: SavedData.descripcion,
+			/* estado: SavedData.contactNumber, */
+			state: 1,
+		  });
+		} catch (err) {
+		  console.log(err);
+		}
+	  }
+
 	const bodyEditar = (
 		<div className={styles.modal}>
 			<h3 className={styles.h3}>EDITAR SESIÓN</h3>

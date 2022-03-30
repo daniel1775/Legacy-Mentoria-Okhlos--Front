@@ -64,7 +64,7 @@ const CrudSessions = () => {
 		start_date: '',
 		end_date: '',
 		description: '',
-		state: 1,
+		state: 1 & 2,
 		
 	});
 
@@ -198,7 +198,7 @@ const CrudSessions = () => {
 			    type="date"
 				name="end_date"
 				className={Styles.inputMaterial}
-				label="Fecha de finalización"e
+				label="Fecha de finalización"
 				onChange={InsertData}
 				value={SavedData && SavedData.end_date}
 			/>
@@ -212,10 +212,10 @@ const CrudSessions = () => {
 			<br />
 			
 			<br />
-			<select type='text'>
+			<select type='text' name='state' onChange={InsertData} value={SavedData && SavedData.state}>
 			    <option value="0">Estado</option>
-				<option value="Habilitado">Habilitado</option>
-				<option value="Deshabilitado">Deshabilitado</option>
+				<option value="2">Habilitada</option>
+				<option value="1">Deshabilitada</option>
 
 			</select>
 			<br />
@@ -238,12 +238,11 @@ const CrudSessions = () => {
 	async function handleModalInsert() {
 		try {
 		  await Axios.post(`${baseUrl}/sessions`, {
-			title: SavedData.titulo,
-			start_date:  SavedData.fechadeInicio,
-			end_date: SavedData.fechadeFinalizacion,
-			description: SavedData.descripcion,
-			/* estado: SavedData.contactNumber, */
-			state: 1,
+			title: SavedData.title,
+			start_date:  SavedData.start_date,
+			end_date: SavedData.end_date,
+			description: SavedData.description,
+			state: SavedData && SavedData.state,
 		  });
 		} catch (err) {
 		  console.log(err);
@@ -297,8 +296,8 @@ const CrudSessions = () => {
 			<br />
 			<select type='text'>
 			    <option value="0">Estado</option>
-				<option value="Habilitado">Habilitado</option>
-				<option value="Deshabilitado">Deshabilitado</option>
+				<option value="1">Habilitado</option>
+				<option value="2">Deshabilitado</option>
 
 			</select>
 			<br />
@@ -351,7 +350,7 @@ const CrudSessions = () => {
 							<td >{e.start_date}</td>
 							<td >{e.end_date}</td>
 							<td > {e.description}</td>
-							<td >{e.state}</td>
+							<td >{e.state === 2 ? 'Habilitada' : 'Deshabilitada'}</td>
 
 							<>
 								<td>

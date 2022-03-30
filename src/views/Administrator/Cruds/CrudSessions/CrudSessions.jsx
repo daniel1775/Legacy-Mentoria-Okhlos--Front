@@ -64,7 +64,7 @@ const CrudSessions = () => {
 		start_date: '',
 		end_date: '',
 		description: '',
-		state: 1,
+		state: 1 & 2,
 		
 	});
 
@@ -212,10 +212,10 @@ const CrudSessions = () => {
 			<br />
 			
 			<br />
-			<select type='text'>
+			<select type='text' name='state' onChange={InsertData} value={SavedData && SavedData.state}>
 			    <option value="0">Estado</option>
-				<option value="Habilitado">Habilitado</option>
-				<option value="Deshabilitado">Deshabilitado</option>
+				<option value="2">Habilitada</option>
+				<option value="1">Deshabilitada</option>
 
 			</select>
 			<br />
@@ -242,8 +242,7 @@ const CrudSessions = () => {
 			start_date:  SavedData.start_date,
 			end_date: SavedData.end_date,
 			description: SavedData.description,
-			
-			state: 1,
+			state: SavedData && SavedData.state,
 		  });
 		} catch (err) {
 		  console.log(err);
@@ -297,8 +296,8 @@ const CrudSessions = () => {
 			<br />
 			<select type='text'>
 			    <option value="0">Estado</option>
-				<option value="Habilitado">Habilitado</option>
-				<option value="Deshabilitado">Deshabilitado</option>
+				<option value="1">Habilitado</option>
+				<option value="2">Deshabilitado</option>
 
 			</select>
 			<br />
@@ -351,7 +350,7 @@ const CrudSessions = () => {
 							<td >{e.start_date}</td>
 							<td >{e.end_date}</td>
 							<td > {e.description}</td>
-							<td >{e.state}</td>
+							<td >{e.state === 2 ? 'Habilitada' : 'Deshabilitada'}</td>
 
 							<>
 								<td>

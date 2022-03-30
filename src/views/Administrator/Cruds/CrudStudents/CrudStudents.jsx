@@ -8,6 +8,7 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import ItemStudent from './components/ItemStudent/ItemStudent.jsx';
 
 const Alertdelete = () => {
   Swal.fire({
@@ -123,8 +124,12 @@ const CrudStudents = () => {
   const [modaleditar, setmodaleditar] = useState(false);
   const [modalver, setmodalver] = useState(false);
   const [inputValue, setInputValue] = useState("");
-
+  // Almacena los valores de la fila a editar
+  const [ choosedData, setChoosedData ] = useState({});
  
+  const saveOptionSelected = (data) => {
+    setChoosedData(data);
+  }
      
   //Insert saved module data
   const [SavedData, setSavedData] = useState({
@@ -582,6 +587,10 @@ const CrudStudents = () => {
     </div>
   );
 
+    useEffect(() => {
+      console.log("CHOOSE DATA = "+ JSON.stringify(choosedData))
+    }, [choosedData])
+
   //Modal structure Ver
 
   const bodyVer = (
@@ -807,7 +816,34 @@ const CrudStudents = () => {
             <tbody>
               {students.map((e) => {
                 return (
-                  <tr>
+                  <ItemStudent 
+                    data={e}
+                    saveOptionSelected={saveOptionSelected}
+                  />
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <Modal open={modalinsertar} onClose={openedClosedModalInsertar}>
+          {bodyInsertar}
+        </Modal>
+
+        <Modal open={modaleditar} onClose={openedClosedModalEditar}>
+          {bodyEditar}
+        </Modal>
+
+        <Modal open={modalver} onClose={openedClosedModalVer}>
+          {bodyVer}
+        </Modal>
+      </div>
+    </>
+  );
+};
+
+export default CrudStudents;
+
+/* <tr>
                     <td>{e.id}</td>
                     <td>{e.name}</td>
                     <td>{e.last_name}</td>
@@ -841,26 +877,4 @@ const CrudStudents = () => {
                         </button>
                       </div>
                     </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        <Modal open={modalinsertar} onClose={openedClosedModalInsertar}>
-          {bodyInsertar}
-        </Modal>
-
-        <Modal open={modaleditar} onClose={openedClosedModalEditar}>
-          {bodyEditar}
-        </Modal>
-
-        <Modal open={modalver} onClose={openedClosedModalVer}>
-          {bodyVer}
-        </Modal>
-      </div>
-    </>
-  );
-};
-
-export default CrudStudents;
+                  </tr> */

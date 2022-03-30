@@ -122,6 +122,7 @@ const CrudStudents = () => {
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
   const [modalver, setmodalver] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
  
      
@@ -184,6 +185,8 @@ const CrudStudents = () => {
   const openedClosedModalVer = () => {
     setmodalver(!modalver);
   };
+
+
 
   //Modal structure Insertar
 
@@ -384,6 +387,13 @@ const CrudStudents = () => {
       console.log(err);
     }
   }
+
+    const search=async()=>{
+      await Axios.get(`${baseUrl}/search-students/${inputValue}`)
+       .then(response=>{
+        setStudents(response.data[0])
+       })
+     }
 
   //Modal structure Editar
 
@@ -748,8 +758,8 @@ const CrudStudents = () => {
         <h1>TABLA CONTROL ESTUDIANTES</h1>
         <div className={styles.header}>
           <div className={styles.containerSearch}>
-          <input type="search" /* name={buscador}  placeholder="Busca un Estudiante"  *//>
-          <button className={styles.search} /*  onClick={(e) => peticionGet(e.target.value)} */ >
+          <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
+          <button className={styles.search} onClick={search} >
           <FontAwesomeIcon icon={faSearch}/>
         </button>
         </div>

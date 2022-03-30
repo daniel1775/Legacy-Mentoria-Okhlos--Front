@@ -247,57 +247,53 @@ const CrudSessions = () => {
 		} catch (err) {
 		  console.log(err);
 		}
-	  }
+	  };
+
+	  
 
 	const bodyEditar = (
 		<div className={styles.modal}>
 			<h3 className={styles.h3}>EDITAR SESIÓN</h3>
 			<TextField
-				name="Titulo"
+				name="title"
 				className={Styles.inputMaterial}
 				label="Titulo"
 				onChange={InsertData}
-				value={SavedData && SavedData.Titulo}
+				value={SavedData && SavedData.title}
 			/>
 			<br />
 			<TextField
 			     type="date"
-				name="Fecha de inicio"
+				name="start_date"
 				className={Styles.inputMaterial}
 				label="Fecha de inicio"
 				onChange={InsertData}
-				value={SavedData && SavedData.Fechadeinicio}
+				value={SavedData && SavedData.start_date}
 			/>
 			<br />
 			<TextField
 			    type="date"
-				name="Fecha de finalizacion"
+				name="end_date"
 				className={Styles.inputMaterial}
 				label="Fecha de finalización"
 				onChange={InsertData}
-				value={SavedData && SavedData.Fechadefinalizacion}
+				value={SavedData && SavedData.end_date}
 			/>
 			<br />
 			<TextField
-				name="Descripcion"
+				name="description"
 				className={Styles.inputMaterial}
 				label="Descripción"
 				onChange={InsertData}
-				value={SavedData && SavedData.Descripcion}
+				value={SavedData && SavedData.description}
 			/>
 			<br />
-			{/* <TextField
-				name="Género"
-				className={Styles.inputMaterial}
-				label="Estado"
-				onChange={InsertData}
-				value={SavedData && SavedData.Nombres}
-			/> */}
+			
 			<br />
-			<select type='text'>
+			<select type='text' name='state' onChange={InsertData} value={SavedData && SavedData.state}>
 			    <option value="0">Estado</option>
-				<option value="1">Habilitado</option>
-				<option value="2">Deshabilitado</option>
+				<option value="2">Habilitado</option>
+				<option value="1">Deshabilitado</option>
 
 			</select>
 			<br />
@@ -355,7 +351,7 @@ const CrudSessions = () => {
 							<>
 								<td>
 								<div className={styles.containerbutton}>
-									<button id={styles.update} onClick={() => openedClosedModalEditar()}>
+									<button id={styles.update} onClick={() =>  openedClosedModalEditar()}>
 										<FontAwesomeIcon icon={faEdit} />
 									</button>
 									{/* <button id={styles.delete}>

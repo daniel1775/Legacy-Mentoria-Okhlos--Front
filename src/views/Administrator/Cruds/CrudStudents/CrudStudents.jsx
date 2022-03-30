@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import styles from "./Style.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrashAlt, faEye, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { Modal, TextField } from "@material-ui/core";
 import Axios from "axios";
 import Swal from "sweetalert2";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import ItemStudent from './components/ItemStudent/ItemStudent.jsx';
 
 const Alertdelete = () => {
   Swal.fire({
@@ -122,9 +123,14 @@ const CrudStudents = () => {
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
   const [modalver, setmodalver] = useState(false);
-
-  const [dataModalInsertar, setDataModalInsertar] = useState([]);
-
+  const [inputValue, setInputValue] = useState("");
+  // Almacena los valores de la fila a editar
+  const [ choosedData, setChoosedData ] = useState({});
+ 
+  const saveOptionSelected = (data) => {
+    setChoosedData(data);
+  }
+     
   //Insert saved module data
   const [SavedData, setSavedData] = useState({
     name: "",
@@ -132,7 +138,7 @@ const CrudStudents = () => {
     lastName: "",
     secondSurname: "",
     actualAge: "",
-    gender: "",
+    gender: 1,
     program: "",
     email: "",
     contactNumber: "",
@@ -146,7 +152,7 @@ const CrudStudents = () => {
   }, [SavedData]);
 
   //base Url of deploy
-  const baseUrl = "https://mentoringapp-back.herokuapp.com";
+  const baseUrl = process.env.REACT_APP_BACKEND_URL;
   //Function to insert the data written in the module.
   const InsertData = (e) => {
     const { name, value } = e.target;
@@ -161,7 +167,7 @@ const CrudStudents = () => {
 
   useEffect(() => {
     Axios({
-      url: `${baseUrl}/students`,
+      url: `${baseUrl}/all-students`,
     })
       .then((response) => {
         setStudents(response.data);
@@ -170,7 +176,7 @@ const CrudStudents = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [setStudents]);
+  }, [ setStudents ]);
 
   //one-button boolean function
   const openedClosedModalInsertar = () => {
@@ -184,6 +190,8 @@ const CrudStudents = () => {
   const openedClosedModalVer = () => {
     setmodalver(!modalver);
   };
+
+
 
   //Modal structure Insertar
 
@@ -200,6 +208,7 @@ const CrudStudents = () => {
             onChange={InsertData}
             value={SavedData && SavedData.name}
           />
+          <br />
         </div>
         <div className="form-group col-md-6">
           <TextField
@@ -381,11 +390,19 @@ const CrudStudents = () => {
         program: SavedData.program,
         mentor: SavedData.mentor,
         active: 1,
+        gender: SavedData.gender,
       });
     } catch (err) {
       console.log(err);
     }
   }
+
+    const search=async()=>{
+      await Axios.get(`${baseUrl}/search-students/${inputValue}`)
+       .then(response=>{
+        setStudents(response.data[0])
+       })
+     }
 
   //Modal structure Editar
 
@@ -555,7 +572,7 @@ const CrudStudents = () => {
       <div align="center">
         <button
           className={styles.button}
-          onClick={() => Alertedit() & openedClosedModalEditar()}
+          onClick={() =>{ Alertedit(); openedClosedModalEditar()} }
         >
           Guardar Cambios
         </button>
@@ -569,6 +586,10 @@ const CrudStudents = () => {
       </div>
     </div>
   );
+
+    useEffect(() => {
+      console.log("CHOOSE DATA = "+ JSON.stringify(choosedData))
+    }, [choosedData])
 
   //Modal structure Ver
 
@@ -749,7 +770,12 @@ const CrudStudents = () => {
       <div className={styles.container}>
         <h1>TABLA CONTROL ESTUDIANTES</h1>
         <div className={styles.header}>
-          <input type="search" placeholder="Busca un Estudiante" />
+          <div className={styles.containerSearch}>
+          <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
+          <button className={styles.search} onClick={search} >
+          <FontAwesomeIcon icon={faSearch}/>
+        </button>
+        </div>
           <button onClick={() => openedClosedModalInsertar()}>
             Insertar Estudiante
           </button>
@@ -767,7 +793,7 @@ const CrudStudents = () => {
           {/* <button >Descargar CVS</button> */}
         </div>
 
-        <div class={styles.containerTable}>
+        <div className={styles.containerTable}>
           <table className={styles.table} id="tableStudent">
             <thead>
               {
@@ -790,7 +816,34 @@ const CrudStudents = () => {
             <tbody>
               {students.map((e) => {
                 return (
-                  <tr>
+                  <ItemStudent 
+                    data={e}
+                    saveOptionSelected={saveOptionSelected}
+                  />
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <Modal open={modalinsertar} onClose={openedClosedModalInsertar}>
+          {bodyInsertar}
+        </Modal>
+
+        <Modal open={modaleditar} onClose={openedClosedModalEditar}>
+          {bodyEditar}
+        </Modal>
+
+        <Modal open={modalver} onClose={openedClosedModalVer}>
+          {bodyVer}
+        </Modal>
+      </div>
+    </>
+  );
+};
+
+export default CrudStudents;
+
+/* <tr>
                     <td>{e.id}</td>
                     <td>{e.name}</td>
                     <td>{e.last_name}</td>
@@ -824,26 +877,4 @@ const CrudStudents = () => {
                         </button>
                       </div>
                     </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        <Modal open={modalinsertar} onClose={openedClosedModalInsertar}>
-          {bodyInsertar}
-        </Modal>
-
-        <Modal open={modaleditar} onClose={openedClosedModalEditar}>
-          {bodyEditar}
-        </Modal>
-
-        <Modal open={modalver} onClose={openedClosedModalVer}>
-          {bodyVer}
-        </Modal>
-      </div>
-    </>
-  );
-};
-
-export default CrudStudents;
+                  </tr> */

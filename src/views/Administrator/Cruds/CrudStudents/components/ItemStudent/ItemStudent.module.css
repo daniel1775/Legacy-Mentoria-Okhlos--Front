@@ -1,0 +1,7 @@
+.table tr {
+  overflow-x: scroll;
+}
+
+tbody tr:hover {
+  background-color: #cccccc;
+}

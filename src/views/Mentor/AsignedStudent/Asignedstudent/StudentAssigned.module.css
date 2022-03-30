@@ -5,8 +5,8 @@
 }
 .pAssigned{
     color: #FFFFFF;
-    padding: 19vh 0 0 3rem;
-    font-size: 2rem;
+    padding: 15vh 0 0 3rem;
+    font-size: 3rem;
 }
 .containerAllAssigned{
     width: 100%;
@@ -18,7 +18,7 @@
     background-color: #fff;
 }
 .containerAssigned{
-    height: 40vh;
+    height: 38vh;
     display: flex;
     flex-wrap: wrap;
     margin-top: 7vh;
@@ -36,6 +36,11 @@
     align-items: center;
     background-color: #FFCC02;
     clip-path: polygon(0% 0, 100% 0%, 92% 100%, 0% 100%);
+}
+
+.photo {
+    width: 8rem;
+
 }
 .nameAssigned{
     width: 35rem;
@@ -75,6 +80,7 @@
 }
 .whiteTxt{
     color: #FFF;
+    font-size: x-large;
 }
 .containerDateSession{
     display: flex;

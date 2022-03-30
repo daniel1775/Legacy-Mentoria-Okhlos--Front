@@ -108,7 +108,7 @@ const MultipleChoice = () => {
       // console.log(idStudent)
       axios
         .post(`${baseUrl}/api/studentsPerfil-control-update/${idStudent}`, { interestsStudent: userinterestsStudent })
-      navigate('/thanks-student')
+      navigate('/student/thanks-studentView')
     } else {
       Swal.fire('Por favor', 'Selecciona 3 intereses', 'info')
     }

@@ -1,8 +1,16 @@
 import React from 'react';
 import stylesMentorAssigned from './MentorAssigned.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import avatar from '../../../assets/Logo/avatar7.png'
 
 const MentorAssigned = () => {
 
+    const phone = <FontAwesomeIcon icon={faPhoneAlt} className={stylesMentorAssigned.assignedIcons} /> /* IconFormFA */
+    const mail = <FontAwesomeIcon icon={faEnvelope} className={stylesMentorAssigned.assignedIcons} /> /* IconFormFA */
+    const bell = <FontAwesomeIcon icon={faBell} className={stylesMentorAssigned.assignedIcons} /> /* IconFormFA */
 
   return (
     <section>
@@ -12,9 +20,11 @@ const MentorAssigned = () => {
         <article className={stylesMentorAssigned.containerAllAssigned}>
             <article className={stylesMentorAssigned.containerAssigned}>
                 <div className={stylesMentorAssigned.profileAssigned}>
-                    <img src="" alt="Profile Picture" />
+                    <img src={avatar} alt="Profile Picture" className={stylesMentorAssigned.profileImgAssigned}/>
                     <div className={stylesMentorAssigned.iconsProfileAssigned}>
-
+                        {phone}
+                        {mail}
+                        {bell}
                     </div>
                 </div>
                 <div className={stylesMentorAssigned.nameAssigned}>

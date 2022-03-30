@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import NavAdmin from './views/Administrator/NavAdmin/NavAdmin';
 import Login from './views/Login/Login';
 
+
 // import NotFound from './views/General/NotFound'
 import Footer from './components/Footer/Footer';
 import MatchForm from './views/Administrator/Match/MatchForm';
@@ -11,7 +12,13 @@ import CrudMentors from './views/Administrator/Cruds/CrudMentor/CrudMentor';
 import CrudStudents from './views/Administrator/Cruds/CrudStudents/CrudStudents';
 import CrudSessions from './views/Administrator/Cruds/CrudSessions/CrudSessions';
 import CrudSessionsDetail from './views/Administrator/Cruds/CrudSessionDetail/CrudSessionDetail';
+
+// mentor imports views //
+import WelcomeMentor from './views/Mentor/Welcome'
+import HomeMentor from './views/Mentor/Homementor'
+
 import { useEffect, useState } from 'react';
+import { Home } from '@material-ui/icons';
 
 function App() {
 	// role 3: Student
@@ -48,12 +55,17 @@ function App() {
 				<Route path="/crud-mentors" element={<CrudMentors />} />
 				<Route path="/crud-sessions-detail" element={<CrudSessionsDetail />} />
 				<Route path="/crud-sessions" element={<CrudSessions />} />
+				
+
+				
 
 				{/* Student's routes */}
 				<Route path="/student" element={<CrudSessions />} />
 
 				{/* Mentor's routes */}
 				<Route path="/mentor" element={<CrudMentors />} />
+				<Route path="/welcome-mentor" element={<WelcomeMentor/>}/>
+				<Route path="/home-mentor" element={<HomeMentor/>}/>
 
 			</Routes>
 			<Footer />

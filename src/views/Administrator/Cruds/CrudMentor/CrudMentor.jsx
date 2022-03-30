@@ -7,7 +7,7 @@ import { Modal, TextField } from "@material-ui/core";
 import Axios from "axios";
 import Swal from "sweetalert2";
 
-const baseUrl = "http://localhost:3001";
+const baseUrl = "process.env.REACT_APP_BACKEND_URL";
 
 //Yellow row data
 const Articles = [

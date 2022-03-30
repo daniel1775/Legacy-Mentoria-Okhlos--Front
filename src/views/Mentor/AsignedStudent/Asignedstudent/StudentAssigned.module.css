@@ -5,9 +5,8 @@
 }
 .pAssigned{
     color: #FFFFFF;
-    padding: 19vh 0 0 3rem;
+    padding: 15vh 0 0 3rem;
     font-size: 3rem;
-    font-weight: 800;
 }
 .containerAllAssigned{
     width: 100%;
@@ -19,7 +18,7 @@
     background-color: #fff;
 }
 .containerAssigned{
-    height: 15vh;
+    height: 38vh;
     display: flex;
     flex-wrap: wrap;
     margin-top: 7vh;
@@ -28,7 +27,7 @@
     box-shadow: 0 4px 5px -1px rgb(68, 68, 68);
 }
 .profileAssigned{
-    width: 50rem;
+    width: 35rem;
     border-top: 0.5vh solid #F1F1F1;
     border-radius: 0.5rem;
     display: flex;
@@ -37,6 +36,11 @@
     align-items: center;
     background-color: #FFCC02;
     clip-path: polygon(0% 0, 100% 0%, 92% 100%, 0% 100%);
+}
+
+.photo {
+    width: 8rem;
+
 }
 .nameAssigned{
     width: 35rem;
@@ -68,7 +72,6 @@
     background-color: #FFCC02;
 }
 .pSession{
-    
     text-align: center;
     margin: 1rem 2rem 1rem 2rem;
 }
@@ -77,6 +80,7 @@
 }
 .whiteTxt{
     color: #FFF;
+    font-size: x-large;
 }
 .containerDateSession{
     display: flex;

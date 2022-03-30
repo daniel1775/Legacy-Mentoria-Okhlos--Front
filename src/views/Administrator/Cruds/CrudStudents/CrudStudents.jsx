@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "./Style.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrashAlt, faEye, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { Modal, TextField } from "@material-ui/core";
 import Axios from "axios";
@@ -122,9 +122,10 @@ const CrudStudents = () => {
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
   const [modalver, setmodalver] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
-  const [dataModalInsertar, setDataModalInsertar] = useState([]);
-
+ 
+     
   //Insert saved module data
   const [SavedData, setSavedData] = useState({
     name: "",
@@ -132,7 +133,7 @@ const CrudStudents = () => {
     lastName: "",
     secondSurname: "",
     actualAge: "",
-    gender: "",
+    gender: 1,
     program: "",
     email: "",
     contactNumber: "",
@@ -161,7 +162,7 @@ const CrudStudents = () => {
 
   useEffect(() => {
     Axios({
-      url: `${baseUrl}/students`,
+      url: `${baseUrl}/all-students`,
     })
       .then((response) => {
         setStudents(response.data);
@@ -184,6 +185,8 @@ const CrudStudents = () => {
   const openedClosedModalVer = () => {
     setmodalver(!modalver);
   };
+
+
 
   //Modal structure Insertar
 
@@ -382,11 +385,19 @@ const CrudStudents = () => {
         program: SavedData.program,
         mentor: SavedData.mentor,
         active: 1,
+        gender: SavedData.gender,
       });
     } catch (err) {
       console.log(err);
     }
   }
+
+    const search=async()=>{
+      await Axios.get(`${baseUrl}/search-students/${inputValue}`)
+       .then(response=>{
+        setStudents(response.data[0])
+       })
+     }
 
   //Modal structure Editar
 
@@ -556,7 +567,7 @@ const CrudStudents = () => {
       <div align="center">
         <button
           className={styles.button}
-          onClick={() => Alertedit() & openedClosedModalEditar()}
+          onClick={() =>{ Alertedit(); openedClosedModalEditar()} }
         >
           Guardar Cambios
         </button>
@@ -750,7 +761,12 @@ const CrudStudents = () => {
       <div className={styles.container}>
         <h1>TABLA CONTROL ESTUDIANTES</h1>
         <div className={styles.header}>
-          <input type="search" placeholder="Busca un Estudiante" />
+          <div className={styles.containerSearch}>
+          <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
+          <button className={styles.search} onClick={search} >
+          <FontAwesomeIcon icon={faSearch}/>
+        </button>
+        </div>
           <button onClick={() => openedClosedModalInsertar()}>
             Insertar Estudiante
           </button>
@@ -768,7 +784,7 @@ const CrudStudents = () => {
           {/* <button >Descargar CVS</button> */}
         </div>
 
-        <div class={styles.containerTable}>
+        <div className={styles.containerTable}>
           <table className={styles.table} id="tableStudent">
             <thead>
               {

@@ -41,6 +41,16 @@ h1 {
   text-align: center;
 }
 
+.containerSearch{
+  display:flex;
+  align-items: center;
+  
+}
+
+.search{
+  max-width: 80px;
+  margin-left:5px;
+}
 .table th {
   margin: 1px;
   padding: 20px 0px 20px 20px;

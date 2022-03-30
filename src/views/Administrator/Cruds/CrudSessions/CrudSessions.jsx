@@ -198,7 +198,7 @@ const CrudSessions = () => {
 			    type="date"
 				name="end_date"
 				className={Styles.inputMaterial}
-				label="Fecha de finalización"e
+				label="Fecha de finalización"
 				onChange={InsertData}
 				value={SavedData && SavedData.end_date}
 			/>
@@ -238,11 +238,11 @@ const CrudSessions = () => {
 	async function handleModalInsert() {
 		try {
 		  await Axios.post(`${baseUrl}/sessions`, {
-			title: SavedData.titulo,
-			start_date:  SavedData.fechadeInicio,
-			end_date: SavedData.fechadeFinalizacion,
-			description: SavedData.descripcion,
-			/* estado: SavedData.contactNumber, */
+			title: SavedData.title,
+			start_date:  SavedData.start_date,
+			end_date: SavedData.end_date,
+			description: SavedData.description,
+			
 			state: 1,
 		  });
 		} catch (err) {

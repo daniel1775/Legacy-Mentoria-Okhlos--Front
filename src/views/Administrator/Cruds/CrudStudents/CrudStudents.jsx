@@ -142,7 +142,7 @@ const CrudStudents = () => {
   });
 
   useEffect(() => {
-    console.log("SAVEDDATA: " + SavedData.gender);
+    /* console.log("SAVEDDATA: " + SavedData.gender) */;
   }, [SavedData]);
 
   //base Url of deploy
@@ -336,7 +336,7 @@ const CrudStudents = () => {
           <select
             type="select"
             className="form-control"
-            name="estado"
+            name="state"
             onChange={InsertData}
             value={SavedData && SavedData.state}
             aria-label="Default select example"
@@ -371,12 +371,15 @@ const CrudStudents = () => {
   // Insert Function in Backend
   async function handleModalInsert() {
     try {
-      await Axios.post(`${baseUrl}/student`, {
+      await Axios.post(`${baseUrl}/students`, {
         name: SavedData.name + SavedData.middleName,
         last_name: SavedData.lastName + SavedData.secondSurname,
         birth_date: SavedData.actualAge,
-        cohort: SavedData.cohorte,
+        gender: SavedData.gender,
         phone: SavedData.contactNumber,
+        email: SavedData.email,
+        program: SavedData.program,
+        mentor: SavedData.mentor,
         active: 1,
       });
     } catch (err) {

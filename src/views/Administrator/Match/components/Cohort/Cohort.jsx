@@ -1,8 +1,9 @@
 import style from "./Cohort.module.css";
 import Select from "react-select";
+import { useEffect, useState } from "react";
 
 export default function Cohort(props) {
-  const { handleTypeSelect, getValuesFinal } = props;
+  const { handleTypeSelectCohort, handleTypeSelectProgram, getValuesFinal, showSelectCohort, setShowSelectCohort } = props;
 
   const cohorte = [
     {
@@ -25,15 +26,19 @@ export default function Cohort(props) {
 
   const programa = [
     {
-      value: "Bootcamp Prográmate",
+      value: 200,
       label: "Bootcamp Prográmate",
     },
 
     {
-      value: "Administración de empresas",
+      value: 201,
       label: "Administración de empresas",
     },
   ];
+
+  const handleValueSelectProgram = e => {
+    e.value === programa[1].value ? setShowSelectCohort(false) : setShowSelectCohort(true)
+  }
 
   return (
     <div className={style.contenedor}>
@@ -45,21 +50,24 @@ export default function Cohort(props) {
           <>
             <h5>Seleccione las opciones.</h5>
 
-            <Select
+            <Select className={showSelectCohort ? style.show : style.hide}
               name="cohorte"
               options={cohorte}
-              onChange={handleTypeSelect}
+              onChange={handleTypeSelectCohort}
             />
             <br />
 
             <Select
               name="programa"
               options={programa}
-              onChange={handleTypeSelect}
+              onChange={e => {handleTypeSelectProgram(e);handleValueSelectProgram(e)}}
             />
             <br />
             {
-              <button className={style.buttonSelect} onClick={getValuesFinal}>
+              <button 
+                className={style.buttonSelect} 
+                onClick={getValuesFinal}
+              >
                 Aceptar
               </button>
             }

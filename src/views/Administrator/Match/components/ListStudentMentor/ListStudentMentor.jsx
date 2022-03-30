@@ -1,142 +1,112 @@
 import style from "./ListStudentMentor.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { faEdit, faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-
+import TableItem from "./components/TableItem/TableItem";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function ListStudentMentor(props) {
-  const { students, mentors, done, match, calculateMatch } = props;
+  const { match, cohort, program } = props;
+
+  const [ choosedData, setChoosedData ] = useState({});
+  const [ mentorsAvailable, setMentorsAvailable ] = useState([]);
+
+  const baseurl = process.env.REACT_APP_BACKEND_URL;
+
+  const handleButtonChange = () => {
+    
+  }
+
+  const getAllMentorsAvailable = async () => {
+    try{
+			await axios.get(`${baseurl}/mentors-available`)
+				.then(response => {
+          setMentorsAvailable(response.data);
+				});
+		}catch(err){
+			console.log(err);
+		}
+  }
+
+  const getIdStudentbyName = async (name, last_name) => {
+    try{
+      await axios.get(`${baseurl}/student-by-name/${name}/${last_name}`)
+				.then(response => {
+					
+				});
+    }catch(err) {
+
+    }
+  }
+
+  const saveOptionSelected = (data) => {
+    setChoosedData(data);
+  }
+
+  useEffect(() => {
+    console.log("mentorsAvailable"+JSON.stringify(mentorsAvailable));
+  }, [ mentorsAvailable ])
 
   return (
     <div className={style.container}>
       <div>
-        <h2>Lista de Estudiantes</h2>
+        <h2>
+          Match
+          <br/>
+          {`Programa: ${program === 200 ? 'Bootcamp Prográmate' : 'Administración de empresas'} `}
+          <br/>
+          {`${program === 200 ? 'Cohorte: ' + cohort : ''} `}
+        </h2>
         <div class={style.containerTable}>
           <table className={style.table}>
             <thead>
               <tr>
-                <th>Id </th>
-                <th>1° Nombre</th>
-                <th>2° Nombre</th>
-                <th>1° Apellido</th>
-                <th>2° Apellido</th>
-                <th>N° Teléfono </th>
-                <th>E-mail</th>
+                <th>N° </th>
+                <th>Nombres Estudiante</th>
+                <th>Apellidos Estudiante</th>
+                <th>Nombres Mentor</th>
+                <th>Apellidos Mentor</th>
+                <th>Media</th>
+                <th>Acciones</th>
               </tr>
             </thead>
-
             <tbody>
-              {students.map((e, index) => {
+              {match.map((e, index) => {
                 return (
-                  <tr key={e.id}>
-                    <td>{index + 1}</td>
-                    <td>{e.user_id.name}</td>
-                    <td>{e.user_id.middleName}</td>
-                    <td>{e.user_id.lastName}</td>
-                    <td>{e.user_id.secondSurname}</td>
-                    <td>{e.user_id.contactNumber}</td>
-                    <td>{e.user_id.email}</td>
-                  </tr>
+                  <TableItem
+                    saveOptionSelected={saveOptionSelected}
+                    data={e}
+                    num={index+1}
+                    mentorsAvailable={mentorsAvailable}
+                    getAllMentorsAvailable={getAllMentorsAvailable}
+                  />
                 );
               })}
             </tbody>
           </table>
         </div>
-      </div>
-      <div>
-        <h2>Lista de Mentores</h2>
-        <div class={style.containerTable}>
-          <table className={style.table}>
-            <thead>
-              <tr>
-                <th>Id </th>
-                <th>1° Nombre</th>
-                <th>2° Nombre</th>
-                <th>1° Apellido</th>
-                <th>2° Apellido</th>
-                <th>N° Teléfono </th>
-                <th>E-mail</th>
-              </tr>
-            </thead>
-            <tbody>
-              {mentors.map((e, index) => {
-                return (
-                  <tr key={e.id}>
-                    <td>{index + 1}</td>
-                    <td>{e.user_id.name}</td>
-                    <td>{e.user_id.middleName}</td>
-                    <td>{e.user_id.lastName}</td>
-                    <td>{e.user_id.secondSurname}</td>
-                    <td>{e.user_id.contactNumber}</td>
-                    <td>{e.user_id.email}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+        <div className={style.containerbutton}>
+          <button>Agregar Match</button>
         </div>
-      </div>
-      {done && (
-        <div>
-          <h2>Match Estudiante Mentor</h2>
-          <div class={style.containerTable}>
-            <table className={style.table}>
-              <thead>
-                <tr>
-                  <th>N° </th>
-                  <th>Nombres Estudiante</th>
-                  <th>Apellidos Estudiante</th>
-                  <th>Nombres Mentor</th>
-                  <th>Apellidos Mentor</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {match.map((e, index) => {
-                  return (
-                    <tr key={e.id}>
-                      <td>{index + 1}</td>
-                      <td>{e.nameEstudent}</td>
-                      <td>{e.lastNameEstudent}</td>
-                      <td>{e.nameMentor}</td>
-                      <td>{e.lastNameMentor}</td>
-                      <td>
-                        <div className={style.containerbuttonactions}>
-                          <button
-                            id={style.update}
-                            /* onClick={() => openedClosedModalVer()} */
-                          >
-                            <FontAwesomeIcon icon={faUserPlus} />
-                          </button>
-
-                          <button
-                            id={style.update}
-                            /* onClick={() => openedClosedModalVer()} */
-                          >
-                            <FontAwesomeIcon icon={faEdit} />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-          <div className={style.containerbutton}>
-            <button>Confirmar Match</button>
-          </div>
-        </div>
-      )}
-      <div className={style.containerbutton}>
-        <button
-          style={{ display: done ? "none" : "block" }}
-          onClick={calculateMatch}
-        >
-          Hacer Match
-        </button>
       </div>
     </div>
   );
 }
+
+/* <tr key={e.id}>
+    <td>{index + 1}</td>
+    <td>{e.name_student}</td>
+    <td>{e.last_name_student}</td>
+    <td>{e.name_mentor}</td>
+    <td>{e.last_name_mentor}</td>
+    <td>{e.score}</td>
+    <td>
+      <div className={style.containerbuttonactions}>
+        <button
+          id={style.update}
+            // onClick={() => openedClosedModalVer()}
+        >
+          <FontAwesomeIcon icon={faExchangeAlt} />
+        </button>
+      </div>
+    </td>
+  </tr> */

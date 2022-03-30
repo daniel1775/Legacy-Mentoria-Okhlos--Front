@@ -7,7 +7,7 @@ import { Modal, TextField } from "@material-ui/core";
 import Axios from "axios";
 import Swal from "sweetalert2";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 const Alertdelete = () => {
   Swal.fire({
@@ -170,7 +170,7 @@ const CrudStudents = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [setStudents]);
+  }, [ setStudents ]);
 
   //one-button boolean function
   const openedClosedModalInsertar = () => {
@@ -200,6 +200,7 @@ const CrudStudents = () => {
             onChange={InsertData}
             value={SavedData && SavedData.name}
           />
+          <br />
         </div>
         <div className="form-group col-md-6">
           <TextField

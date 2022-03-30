@@ -1,10 +1,50 @@
 import style from "./ListStudentMentor.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { faEdit, faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TableItem from "./components/TableItem/TableItem";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function ListStudentMentor(props) {
   const { match, cohort, program } = props;
+
+  const [ choosedData, setChoosedData ] = useState({});
+  const [ mentorsAvailable, setMentorsAvailable ] = useState([]);
+
+  const baseurl = process.env.REACT_APP_BACKEND_URL;
+
+  const handleButtonChange = () => {
+    
+  }
+
+  const getAllMentorsAvailable = async () => {
+    try{
+			await axios.get(`${baseurl}/mentors-available`)
+				.then(response => {
+          setMentorsAvailable(response.data);
+				});
+		}catch(err){
+			console.log(err);
+		}
+  }
+
+  const getIdStudentbyName = async (name, last_name) => {
+    try{
+      await axios.get(`${baseurl}/student-by-name/${name}/${last_name}`)
+				.then(response => {
+					
+				});
+    }catch(err) {
+
+    }
+  }
+
+  const saveOptionSelected = (data) => {
+    setChoosedData(data);
+  }
+
+  useEffect(() => {
+    console.log("mentorsAvailable"+JSON.stringify(mentorsAvailable));
+  }, [ mentorsAvailable ])
 
   return (
     <div className={style.container}>
@@ -30,34 +70,15 @@ export default function ListStudentMentor(props) {
               </tr>
             </thead>
             <tbody>
-              {console.log(match)}
               {match.map((e, index) => {
                 return (
-                  <tr key={e.id}>
-                    <td>{index + 1}</td>
-                    <td>{e.name_student}</td>
-                    <td>{e.last_name_student}</td>
-                    <td>{e.name_mentor}</td>
-                    <td>{e.last_name_mentor}</td>
-                    <td>{e.score}</td>
-                    <td>
-                      <div className={style.containerbuttonactions}>
-                        <button
-                          id={style.update}
-                          /* onClick={() => openedClosedModalVer()} */
-                        >
-                          <FontAwesomeIcon icon={faUserPlus} />
-                        </button>
-
-                        <button
-                          id={style.update}
-                          /* onClick={() => openedClosedModalVer()} */
-                        >
-                          <FontAwesomeIcon icon={faEdit} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                  <TableItem
+                    saveOptionSelected={saveOptionSelected}
+                    data={e}
+                    num={index+1}
+                    mentorsAvailable={mentorsAvailable}
+                    getAllMentorsAvailable={getAllMentorsAvailable}
+                  />
                 );
               })}
             </tbody>
@@ -70,3 +91,22 @@ export default function ListStudentMentor(props) {
     </div>
   );
 }
+
+/* <tr key={e.id}>
+    <td>{index + 1}</td>
+    <td>{e.name_student}</td>
+    <td>{e.last_name_student}</td>
+    <td>{e.name_mentor}</td>
+    <td>{e.last_name_mentor}</td>
+    <td>{e.score}</td>
+    <td>
+      <div className={style.containerbuttonactions}>
+        <button
+          id={style.update}
+            // onClick={() => openedClosedModalVer()}
+        >
+          <FontAwesomeIcon icon={faExchangeAlt} />
+        </button>
+      </div>
+    </td>
+  </tr> */

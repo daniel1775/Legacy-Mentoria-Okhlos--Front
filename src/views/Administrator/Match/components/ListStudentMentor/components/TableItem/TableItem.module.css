@@ -1,0 +1,52 @@
+.table td {
+  padding: 8px 0px 8px 20px;
+  border-bottom: 1px solid #000000;
+}
+
+.table tr {
+  overflow-x: scroll;
+}
+
+.input{
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+  
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  background-color: #ffffff;
+  margin: 1% auto;
+  align-items: center;
+  padding: 30px;
+  color: #000000;
+  border-radius: 10px;
+}
+
+.modal_title {
+  text-align: center;
+}
+
+.container_select {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.container_select select {
+  width: 50%;
+}
+
+.container_buttons {
+  display: flex;
+}
+
+.container_buttons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

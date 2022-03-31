@@ -27,24 +27,9 @@ export default function ListStudentMentor(props) {
 		}
   }
 
-  const getIdStudentbyName = async (name, last_name) => {
-    try{
-      await axios.get(`${baseurl}/student-by-name/${name}/${last_name}`)
-				.then(response => {
-					
-				});
-    }catch(err) {
-
-    }
-  }
-
   const saveOptionSelected = (data) => {
     setChoosedData(data);
   }
-
-  useEffect(() => {
-    console.log("mentorsAvailable"+JSON.stringify(mentorsAvailable));
-  }, [ mentorsAvailable ])
 
   return (
     <div className={style.container}>

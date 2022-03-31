@@ -15,28 +15,9 @@ const MatchForm = () => {
   // saved the value choosed for the user in the selects
   const [cohort, setCohort] = useState(3);
   const [program, setProgram] = useState(200);
-  // load the data of cohort and program from DB
-  const [cohortData, setCohortData] = useState([]);
-  const [programData, setProgramData] = useState([]);
   const [ showSelectCohort, setShowSelectCohort ] = useState(true);
 
   const baseUrl = process.env.REACT_APP_BACKEND_URL;
-
-  const loadCohorts = async () => {
-    await axios.get(`${baseUrl}/match/${cohort}/${program}`)
-    .then(response => {
-      console.log("DATA" + JSON.stringify(response.data));
-      setMatch(response.data);
-    });
-  }
-
-  const loadPrograms = async () => {
-    await axios.get(`${baseUrl}/match/${cohort}/${program}`)
-    .then(response => {
-      console.log("DATA" + JSON.stringify(response.data));
-      setMatch(response.data);
-    });
-  }
 
   // almacena el valor escogido en la seccion de cohorte (corregir)
   const handleTypeSelectCohort = e => {

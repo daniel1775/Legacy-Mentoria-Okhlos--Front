@@ -125,12 +125,12 @@ const CrudStudents = () => {
   const [modalver, setmodalver] = useState(false);
   const [inputValue, setInputValue] = useState("");
   // Almacena los valores de la fila a editar
-  const [ choosedData, setChoosedData ] = useState({});
- 
+  const [choosedData, setChoosedData] = useState({});
+
   const saveOptionSelected = (data) => {
     setChoosedData(data);
   }
-     
+
   //Insert saved module data
   const [SavedData, setSavedData] = useState({
     name: "",
@@ -176,7 +176,7 @@ const CrudStudents = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [ setStudents ]);
+  }, [setStudents]);
 
   //one-button boolean function
   const openedClosedModalInsertar = () => {
@@ -190,6 +190,10 @@ const CrudStudents = () => {
   const openedClosedModalVer = () => {
     setmodalver(!modalver);
   };
+
+  const reload = () => {
+		window.location.reload(true);
+	};
 
 
 
@@ -252,7 +256,7 @@ const CrudStudents = () => {
           />
         </div>
         <div className="form-group col-md-6">
-        <select
+          <select
             type="select"
             className="form-control"
             name="gender"
@@ -352,7 +356,7 @@ const CrudStudents = () => {
           >
             <option value="0">Deshabilitado</option>
             <option value="1">Habilitado</option>
-            
+
           </select>
         </div>
       </div>
@@ -362,7 +366,7 @@ const CrudStudents = () => {
         <button
           className={Styles.Button}
           onClick={() => {
-            Alertcreate();openedClosedModalInsertar(); handleModalInsert();
+            Alertcreate(); openedClosedModalInsertar(); handleModalInsert();
           }}
         >
           Insertar
@@ -380,7 +384,7 @@ const CrudStudents = () => {
   // Insert Function in Backend
   async function handleModalInsert() {
     try {
-      await Axios.post(`${baseUrl}/students`, {
+      await Axios.post(`${baseUrl}/student`, {
         name: SavedData.name + SavedData.middleName,
         last_name: SavedData.lastName + SavedData.secondSurname,
         birth_date: SavedData.actualAge,
@@ -397,12 +401,12 @@ const CrudStudents = () => {
     }
   }
 
-    const search=async()=>{
-      await Axios.get(`${baseUrl}/search-students/${inputValue}`)
-       .then(response=>{
+  const search = async () => {
+    await Axios.get(`${baseUrl}/search-students/${inputValue}`)
+      .then(response => {
         setStudents(response.data[0])
-       })
-     }
+      })
+  }
 
   //Modal structure Editar
 
@@ -462,7 +466,7 @@ const CrudStudents = () => {
           />
         </div>
         <div className="form-group col-md-6">
-        <select
+          <select
             type="select"
             className="form-control"
             name="gender"
@@ -563,7 +567,7 @@ const CrudStudents = () => {
           >
             <option value="0">Deshabilitado</option>
             <option value="1">Habilitado</option>
-            
+
           </select>
         </div>
       </div>
@@ -572,7 +576,7 @@ const CrudStudents = () => {
       <div align="center">
         <button
           className={styles.button}
-          onClick={() =>{ Alertedit(); openedClosedModalEditar()} }
+          onClick={() => { Alertedit(); openedClosedModalEditar() }}
         >
           Guardar Cambios
         </button>
@@ -587,9 +591,9 @@ const CrudStudents = () => {
     </div>
   );
 
-    useEffect(() => {
-      console.log("CHOOSE DATA = "+ JSON.stringify(choosedData))
-    }, [choosedData])
+  useEffect(() => {
+    console.log("CHOOSE DATA = " + JSON.stringify(choosedData))
+  }, [choosedData])
 
   //Modal structure Ver
 
@@ -649,7 +653,7 @@ const CrudStudents = () => {
           />
         </div>
         <div className="form-group col-md-6">
-        <select
+          <select
             type="select"
             className="form-control"
             name="gender"
@@ -749,7 +753,7 @@ const CrudStudents = () => {
           >
             <option value="0">Deshabilitado</option>
             <option value="1">Habilitado</option>
-            
+
           </select>
         </div>
       </div>
@@ -771,11 +775,13 @@ const CrudStudents = () => {
         <h1>TABLA CONTROL ESTUDIANTES</h1>
         <div className={styles.header}>
           <div className={styles.containerSearch}>
-          <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
-          <button className={styles.search} onClick={search} >
-          <FontAwesomeIcon icon={faSearch}/>
-        </button>
-        </div>
+            <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+            <button className={styles.search} onClick={search} >
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
+
+          </div>
+          <button onClick={() => reload()}>Actualizar tabla</button>
           <button onClick={() => openedClosedModalInsertar()}>
             Insertar Estudiante
           </button>
@@ -789,8 +795,8 @@ const CrudStudents = () => {
             buttonText="Descargar CSV"
           />
 
-          <button>Insertar CSV</button>
-          {/* <button >Descargar CVS</button> */}
+         
+           
         </div>
 
         <div className={styles.containerTable}>
@@ -816,7 +822,7 @@ const CrudStudents = () => {
             <tbody>
               {students.map((e) => {
                 return (
-                  <ItemStudent 
+                  <ItemStudent
                     data={e}
                     saveOptionSelected={saveOptionSelected}
                   />

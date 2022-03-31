@@ -16,10 +16,14 @@ const SearchContainer = (props) => {
 					onChange={props.onChange}
 					value={props.value}
 				/>
-
+                 <button className={Styles.button2} onClick={props.onClick2}>
+					{props.button2}
+					</button>
 				<button className={Styles.button} onClick={props.onClick}>
 					{props.button}
 				</button>
+				
+			
 				
 			</div>
 		</div>

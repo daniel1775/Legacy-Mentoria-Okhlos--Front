@@ -31,6 +31,15 @@
 	display: flex;
 	justify-content: center;
 }
+.button2 {
+	width: 50%;
+	background-color: #ffcc02;
+	color: black;
+	padding: 10px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+}
 
 .Container button:hover {
 	background-color: #000000;
@@ -52,5 +61,14 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		width: 90%;
+		
+	}
+	.Container input {
+		min-width: 35vw;
+		height: 6vh;
+		border: #181818 solid 0.12rem;
+		border-radius: 1rem;
+		padding: 2px 15px;
 	}
 }

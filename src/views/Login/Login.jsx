@@ -1,5 +1,6 @@
 import style from './Login.module.css';
 import logo from '../../assets/Logo/programateAcademyLogo.png';
+import imalog from '../../components/assets/images/img6.jpg'
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -24,17 +25,22 @@ export default function Login(props) {
 
 	return (
 		<div className={style.container}>
-			<div className="container-login-page">
-				<img className="logoLogin" src={logo} alt="logo-programate" />
-				<h2 className="loginTitle">Ingresa a Okhlos</h2>
+		
+			<div className={style.boximag}>
+				<img className={style.imagenlogin} src={imalog} alt="logo-programate" />
+			</div>
+			<div className={style.login}>
+
+				<img className={style.logoLogin} src={logo} alt="logo-programate" />
+				<h2 className={style.loginTitle}>Ingresa a Okhlos</h2>
 
 				<form
-					className="form"
+					containerclassName={style.form}
 					onSubmit={() => {
 						console.log('');
 					}}
 				>
-					<div className="container-login-form-content">
+					<div className={style.containerinput}>
 						<input
 							label="Correo"
 							placeholder="ejemplo@ejemplo.com"
@@ -56,7 +62,7 @@ export default function Login(props) {
 					</div>
 
 					<button
-						className="button-login"
+						className={style.buttonlogin}
 						type="submit"
 						onClick={sendLogin}
 					>
@@ -64,6 +70,7 @@ export default function Login(props) {
 					</button>
 				</form>
 			</div>
+			
 		</div>
 	);
 }

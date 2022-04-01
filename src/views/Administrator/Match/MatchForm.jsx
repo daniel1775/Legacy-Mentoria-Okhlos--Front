@@ -30,8 +30,6 @@ const MatchForm = () => {
 
   const getValuesFinal = async () => {
     setShowViewCohort(false);
-    console.log(cohort)
-    console.log(program)
     try {
       await axios.get(`${baseUrl}/match/${cohort}/${program}`)
       .then(response => {

@@ -1,16 +1,15 @@
-import style from './TableItem.module.css';
-import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import style from './ButtonModal.module.css';
 import { Modal } from "@material-ui/core";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function TableItem(props){
-  const { saveOptionSelected, data, num, mentorsAvailable, getAllMentorsAvailable } = props;  
+export default function ButtonModal(props){
+  const { mentorsAvailable, studentsAvailable, getAllStudentsAvailable, getAllMentorsAvailable, cohort, program } = props;
 
   const [ modalEditar, setModalEditar ] = useState(false);
   const [ radioCheck, setRadioCheck ] = useState(0);
   const [ mentorChoosed, setMentorChoosed ] = useState(0);
+  const [ studentChoosed, setStudentChoosed ] = useState(0)
   const [ showInputMatch, setShowInputMatch ] = useState(false);
   const [ matchMentor, setMatchMentor ] = useState({});
 
@@ -23,7 +22,7 @@ export default function TableItem(props){
   const calculateMatch = async () => {
     setShowInputMatch(true);
     try {
-      await axios.get(`${baseurl}/match/calculate/${data.id_student}`)
+      await axios.get(`${baseurl}/match/calculate/${studentChoosed}`)
 				.then(response => {
           setMatchMentor(response.data)
 				});
@@ -32,27 +31,46 @@ export default function TableItem(props){
     }
   }
 
-  const handleConfirmMatch = async () => {
+  const root = () => {
     openedClosedModalEditar();
-    try {
-      await axios.put(`${baseurl}/match/confirm`, {
-        id_student: data.id_student,
-        id_mentor: matchMentor.id_mentor,
-        score: matchMentor.score
-      }).then(response => {
-        alert("Match actualizado correactamente");
-      });
+    try {  
+      getAllMentorsAvailable()
+      getAllStudentsAvailable()
     } catch (err) {
       console.log(err);
     }
   }
 
-  const handlePutMatch = async () => {
+  const handleConfirmMatch = async () => {
+    openedClosedModalEditar();
+    try {
+      await axios.post(`${baseurl}/match/create`, {
+        id_student: studentChoosed,
+        id_mentor: matchMentor.id_mentor,
+        score: 0,
+        cohort: cohort,
+        program: program
+      })
+				.then(response => {
+          alert("Match creado correactamente");
+				});
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const handleCreateMatch = async () => {
     openedClosedModalEditar()
     try{
-			await axios.put(`${baseurl}/match/update/${data.id_student}/${mentorChoosed}`)
+			await axios.post(`${baseurl}/match/create`, {
+        id_student: studentChoosed,
+        id_mentor: mentorChoosed,
+        score: 0,
+        cohort: cohort,
+        program: program
+      })
 				.then(response => {
-          alert("Match actualizado correactamente");
+          alert("Match creado correactamente");
 				});
 		}catch(err){
 			console.log(err);
@@ -63,12 +81,20 @@ export default function TableItem(props){
     <div className={style.modal}>
       <h3>Cambiar Match</h3>
       <div className={style.input}>
-        <label>
-          Estudiante
-          <input value={`${data.name_student} ${data.last_name_student}`} type="text" readOnly/>
-        </label>
+        <label>Estudiantes disponibles</label>
+        <select
+          type="select"
+          className="form-control"
+          name="student"
+          value={studentChoosed}
+          onChange={e => setStudentChoosed(e.target.value)}
+        >
+          {studentsAvailable.map(e => (
+            <option value={e.id_student}>{`${e.name} ${e.last_name}`}</option>
+          ))}
+        </select>
       </div>
-      <div onChange={e => setRadioCheck(e.target.value)} className={style.container_checkbox}>  
+      <div onChange={e => setRadioCheck(e.target.value)} className={style.container_checkbox}>
         <label>
           Automatico
           <input type="radio" name="check" value={1}/> 
@@ -102,36 +128,21 @@ export default function TableItem(props){
             <option value={e.id}>{`${e.name_mentor} ${e.last_name_mentor}`}</option>
           ))}
         </select>
-        <button onClick={handlePutMatch}>Confirmar</button>
+        <button onClick={handleCreateMatch}>Confirmar</button>
       </div>
     </div>
   )
 
   return(
-    <tr key={data.id}>
-      <td>{num}</td>
-      <td>{data.name_student}</td>
-      <td>{data.last_name_student}</td>
-      <td>{data.name_mentor}</td>
-      <td>{data.last_name_mentor}</td>
-      <td>{data.score}</td>
-      <td>
-        <div className={style.containerbuttonactions}>
-          <button
-            id={style.update}
-            onClick={() => {
-              saveOptionSelected(data);
-              openedClosedModalEditar();
-              getAllMentorsAvailable()}}
-            /* onClick={() => openedClosedModalVer()} */
-          >
-            <FontAwesomeIcon icon={faExchangeAlt} />
-          </button>
-        </div>
-      </td>
+    <> 
+      <button onClick={() => {
+        root()
+      }}>
+        AGREGAR MATCH
+      </button>
       <Modal open={modalEditar} onClose={openedClosedModalEditar}>
         {modal}
       </Modal>
-    </tr>
+    </>
   )
 }

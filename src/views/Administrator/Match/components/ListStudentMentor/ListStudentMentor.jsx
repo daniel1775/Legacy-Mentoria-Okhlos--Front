@@ -2,6 +2,7 @@ import style from "./ListStudentMentor.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TableItem from "./components/TableItem/TableItem";
 import { useEffect, useState } from "react";
+import ButtonModal from "./components/ButtonModal/ButtonModal";
 import axios from "axios";
 
 export default function ListStudentMentor(props) {
@@ -9,14 +10,27 @@ export default function ListStudentMentor(props) {
 
   const [ choosedData, setChoosedData ] = useState({});
   const [ mentorsAvailable, setMentorsAvailable ] = useState([]);
+  const [ studentsAvailable, setStudentsAvailable ] = useState([]);
 
   const baseurl = process.env.REACT_APP_BACKEND_URL;
 
   const getAllMentorsAvailable = async () => {
     try{
-			await axios.get(`${baseurl}/mentors-available`)
+			await axios.get(`${baseurl}/mentors/available`)
 				.then(response => {
           setMentorsAvailable(response.data);
+				});
+		}catch(err){
+			console.log(err);
+		}
+  }
+
+  const getAllStudentsAvailable = async () => {
+    try{
+			await axios.get(`${baseurl}/students/available`)
+				.then(response => {
+          console.log("RESPONSE: "+JSON.stringify(response.data));
+          setStudentsAvailable(response.data);
 				});
 		}catch(err){
 			console.log(err);
@@ -66,7 +80,14 @@ export default function ListStudentMentor(props) {
           </table>
         </div>
         <div className={style.containerbutton}>
-          <button>Agregar Match</button>
+          <ButtonModal 
+            mentorsAvailable={mentorsAvailable}
+            studentsAvailable={studentsAvailable}
+            getAllStudentsAvailable={getAllStudentsAvailable}
+            getAllMentorsAvailable={getAllMentorsAvailable}
+            cohort={cohort}
+            program={program}
+          />
         </div>
       </div>
     </div>

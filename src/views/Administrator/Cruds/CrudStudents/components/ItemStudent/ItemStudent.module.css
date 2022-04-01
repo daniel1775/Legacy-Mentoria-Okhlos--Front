@@ -1,7 +1,137 @@
-.table tr {
-  overflow-x: scroll;
+
+.containerbutton {
+  width: 100%;
+  display: flex;
+  justify-content: left;
 }
 
-tbody tr:hover {
-  background-color: #cccccc;
+
+
+#update {
+  width: 40px;
+  background-color: transparent;
+  padding: 2px;
+  margin: 2px;
+  border: none;
+  box-shadow: none;
+  color: #1a2818;
+  cursor: pointer;
 }
+
+#update :hover {
+  background-color: none;
+  color: red;
+}
+
+#delete {
+  width: 40px;
+  background-color: transparent;
+  padding: 2px;
+  margin: 2px;
+  border: none;
+  box-shadow: none;
+  color: #1a2818;
+  cursor: pointer;
+}
+
+#delete :hover {
+  color: red;
+}
+
+.modal {
+  max-width: 600px;
+  background-color: #ffffff;
+  margin: 1% auto;
+  align-items: center;
+  padding: 30px;
+  color: #000000;
+  border-radius: 10px;
+  font-family: 'Roboto-bold', sans-serif;
+}
+.modal select {
+  margin-top: 10px;
+  font-family: 'Roboto-bold', sans-serif;
+}
+
+
+.modal input[type="date"]{
+  text-align: right;
+  font-size: 10px;
+  margin-top: 10px;
+  font-family: 'Roboto-bold', sans-serif;
+}
+
+
+
+
+.modal h3 {
+  color: #000000;
+  text-align: center;
+  font-size: 28px;
+  font-family: Gilroy-ExtraBold;
+}
+
+.modal button {
+  border-radius: 10px;
+  background-color: #ffcc02;
+  max-width: 170px;
+  padding: 8px;
+  font-size: 16px;
+  box-shadow: 3px 3px 5px #a0a0a0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto-bold', sans-serif;
+}
+
+.modal button:hover {
+  background-color: #000000;
+  color: #ffcc02;
+  max-width: 170px;
+  padding: 8px;
+  font-size: 16px;
+  box-shadow: 3px 3px 5px #a0a0a0;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  width: 98%;
+  margin: 20px auto;
+  align-items: center;
+}
+
+
+
+.modal label{
+  font-family: 'Roboto-bold', sans-serif;
+  color: #000000;
+}
+
+.modal input[type="text"],input[type=email],input[type=number]{
+  font-family: 'Roboto-bold', sans-serif;
+  color: #000000;
+}
+
+.inputMaterial {
+  width: 100%;
+  height: 2.5rem;
+ 
+}
+
+
+@media screen and (max-width: 600px) {
+  .modal {
+    margin: 20px;
+  }
+  .modal h3 {
+    color: #000000;
+    text-align: center;
+    font-size: 24px;
+  }
+
+  
+}
+

@@ -17,6 +17,7 @@ import CrudSessionsDetail from './views/Administrator/Cruds/CrudSessionDetail/Cr
 // mentor imports views //
 import WelcomeMentor from './views/Mentor/Welcome'
 import HomeMentor from './views/Mentor/Homementor'
+import FormMentor from './views/Mentor/FormMentor'
 
 import { useEffect, useState } from 'react';
 //student imports components
@@ -75,6 +76,7 @@ function App() {
 				<Route path="/mentor" element={<CrudMentors />} />
 				<Route path="/welcome-mentor" element={<WelcomeMentor/>}/>
 				<Route path="/home-mentor" element={<HomeMentor/>}/>
+				<Route path="/form-mentor" element={<FormMentor/>}/>
 
 			</Routes>
 			<Footer />

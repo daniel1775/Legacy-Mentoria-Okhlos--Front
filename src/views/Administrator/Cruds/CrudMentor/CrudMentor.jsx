@@ -9,6 +9,8 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Axios from "axios";
 import Swal from "sweetalert2";
 import ItemMentor from './components/ItemMentor/ItemMentor'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const baseUrl = "https://mentoringapp-back.herokuapp.com";
 
@@ -138,11 +140,19 @@ const CrudMentor = () => {
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
   const [modalver, setmodalver] = useState(false);
+  const [inputValue, setInputValue] = useState("");
   //This const saved the values to edit
   const [choosedData, setChoosedData] = useState({});
 
   const saveOptionSelected = (data) => {
     setChoosedData(data);
+  }
+
+  const search = async () => {
+    await Axios.get(`${baseUrl}/search-mentors/${inputValue}`)
+      .then(response => {
+        setMentors(response.data[0])
+      })
   }
 
   //Insert saved module data
@@ -299,6 +309,7 @@ const CrudMentor = () => {
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
+           type="date"
             name="born"
             className={Styles.inputMaterial}
             label="Fecha de nacimiento"
@@ -492,9 +503,10 @@ const CrudMentor = () => {
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
+          type="date"
             name="Edad"
             className={Styles.inputMaterial}
-            label="Edad"
+            label="Fecha de naciniemto"
             onChange={InsertData}
             value={SavedData && SavedData.Edad}
           />
@@ -682,9 +694,10 @@ const CrudMentor = () => {
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
+            type="date"
             name="Edad"
             className={Styles.inputMaterial}
-            label="Edad"
+            label="Fecha de nacimiento"
             onChange={InsertData}
             value={SavedData && SavedData.Edad}
           />
@@ -813,7 +826,13 @@ const CrudMentor = () => {
     <div className={styles.container}>
       <h1>TABLA CONTROL MENTORES</h1>
       <div className={styles.header}>
-        <input type="search" placeholder="Busca un Mentor" />
+      <div className={styles.containerSearch}>
+            <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+            <button className={styles.search} onClick={search} >
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
+
+          </div>
         
         <button onClick={() => reload()}>Actualizar tabla</button>
         <button onClick={() => openedClosedModalInsertar()}>

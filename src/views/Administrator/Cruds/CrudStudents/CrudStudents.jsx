@@ -164,11 +164,16 @@ const CrudStudents = () => {
     console.log(SavedData);
   };
 
+  const removeStudent = async (id) => {
+    await Axios.delete(`${baseUrl}/student/${id}`);
+   
+};
+
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
     Axios({
-      url: `${baseUrl}/students`,
+      url: `${baseUrl}/all-students`,
     })
       .then((response) => {
         setStudents(response.data);
@@ -872,7 +877,8 @@ export default CrudStudents;
                         </button>
                         <button
                           id={styles.delete}
-                          onClick={() => Alertdelete()}
+                         // onClick={() => Alertdelete()}
+                          onClick={() => removeStudent(e.id)}
                         >
                           <FontAwesomeIcon icon={faTrashAlt} />
                         </button>

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import styles from "./CrudMentor.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons";
+/* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; */
+/* import { faEdit, faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons"; */
 import { makeStyles } from "@material-ui/core/styles";
 import { Modal, TextField } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Axios from "axios";
 import Swal from "sweetalert2";
+import ItemMentor from './components/ItemMentor/ItemMentor'
 
 const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -137,6 +138,13 @@ const CrudMentor = () => {
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
   const [modalver, setmodalver] = useState(false);
+  //This const saved the values to edit
+  const [choosedData, setChoosedData] = useState({});
+
+  const saveOptionSelected = (data) => {
+    setChoosedData(data);
+  }
+
   //Insert saved module data
   const [SavedData, setSavedData] = useState({
     name: "",
@@ -171,7 +179,7 @@ const CrudMentor = () => {
 
   useEffect(() => {
     Axios({
-      url: `${baseUrl}/all-mentors`,
+      url: `${baseUrl}/mentors`,
     })
       .then((response) => {
         setMentors(response.data);
@@ -208,8 +216,8 @@ const CrudMentor = () => {
 	};
 
 
-   //insert mentor fuction
-   async function handleModalInsertMentor() {     
+  //insert mentor fuction
+  async function handleModalInsertMentor() {
     try {
       await Axios.post(`${baseUrl}/mentor`, {
         name: SavedData.name,
@@ -218,6 +226,12 @@ const CrudMentor = () => {
         sons: SavedData.childs,
         num_students: SavedData.assignStu,
         phone: SavedData.phone,
+        email: SavedData.mailMentor,
+        interest: SavedData.interestsMentor,
+        program: SavedData.programMentor,
+        studies: SavedData.studiesMentor,
+        business: SavedData.businessMentor,
+        role: SavedData.roleMentor,
         // 2 habilitado 1 desabilitado
         active: SavedData.state,
         // 1hombre 2mujer 3otro
@@ -844,10 +858,37 @@ const CrudMentor = () => {
           <tbody>
             {mentors.map((e) => {
               return (
-                <tr>
+                <ItemMentor
+                  data={e}
+                  saveOptionSelected={saveOptionSelected}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <Modal open={modalinsertar} onClose={openedClosedModalInsertar}>
+        {bodyInsertar}
+      </Modal>
+
+      <Modal open={modaleditar} onClose={openedClosedModalEditar}>
+        {bodyEditar}
+      </Modal>
+
+      <Modal open={modalver} onClose={openedClosedModalVer}>
+        {bodyVer}
+      </Modal>
+    </div>
+  );
+};
+
+export default CrudMentor;
+
+
+{/* <tr>
                   <td>{e.id}</td>
                   <td>{e.name}</td>
-                  <td> {e.last_name}</td>
+                  <td>{e.last_name}</td>
                   <td>{e.birth_date}</td>
                   <td>{e.gender === 2 ? "Femenino" : e.gender === 1 ? "Masculino" : e.gender === 3 ? "Otro" : null}</td>
                   <td>{e.phone}</td>
@@ -877,25 +918,4 @@ const CrudMentor = () => {
                       </button>
                     </div>
                   </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      <Modal open={modalinsertar} onClose={openedClosedModalInsertar}>
-        {bodyInsertar}
-      </Modal>
-
-      <Modal open={modaleditar} onClose={openedClosedModalEditar}>
-        {bodyEditar}
-      </Modal>
-
-      <Modal open={modalver} onClose={openedClosedModalVer}>
-        {bodyVer}
-      </Modal>
-    </div>
-  );
-};
-
-export default CrudMentor;
+                </tr> */}

@@ -144,7 +144,8 @@ const CrudStudents = () => {
     contactNumber: "",
     cohorte: "",
     role: 1,
-    estado: 1,
+    state: 1,
+    password:"",
   });
 
   useEffect(() => {
@@ -167,7 +168,7 @@ const CrudStudents = () => {
 
   useEffect(() => {
     Axios({
-      url: `${baseUrl}/all-students`,
+      url: `${baseUrl}/students`,
     })
       .then((response) => {
         setStudents(response.data);
@@ -282,9 +283,6 @@ const CrudStudents = () => {
             onChange={InsertData}
             aria-label="Default select example"
           >
-            <option value="0" selected="">
-              Programa
-            </option>
             <option value="200">Bootcamp Prográmate</option>
             <option value="201">
               Administración de Empresas
@@ -395,6 +393,7 @@ const CrudStudents = () => {
         mentor: SavedData.mentor,
         active: 1,
         gender: SavedData.gender,
+        password: SavedData.password,
       });
     } catch (err) {
       console.log(err);
@@ -492,9 +491,7 @@ const CrudStudents = () => {
             onChange={InsertData}
             aria-label="Default select example"
           >
-            <option value="0" selected="">
-              Programa
-            </option>
+           
             <option value="200">Bootcamp Prográmate</option>
             <option value="201">
               Administración de Empresas
@@ -679,9 +676,7 @@ const CrudStudents = () => {
             onChange={InsertData}
             aria-label="Default select example"
           >
-            <option value="0" selected="">
-              Programa
-            </option>
+           
             <option value="200">Bootcamp Prográmate</option>
             <option value="201">
               Administración de Empresas

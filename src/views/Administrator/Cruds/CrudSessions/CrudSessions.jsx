@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './CrudSessions.module.css';
+import NavEstudent from '../../Administrator/NavStudent/NavStudent';
+
 import SearchContainer from '../../../../components/SearchContainer/SearchContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faUserPlus } from '@fortawesome/free-solid-svg-icons';

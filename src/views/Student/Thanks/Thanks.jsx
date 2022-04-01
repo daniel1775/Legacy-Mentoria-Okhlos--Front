@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import studentStyle from './thanksStudent.module.css';
+import NavEstudent from '../../Administrator/NavStudent/NavStudent';
+
 /* import { useSelector } from 'react-redux' */
 import logo from '../../../assets/Logo/programateAcademyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -32,6 +34,8 @@ const Thanks = () => {
 
 
   return (
+    <>
+    <NavEstudent/>
     <section className={studentStyle.containerAll}>
       <div className={studentStyle.logoContainer}>
         <img src={logo} alt="Programate Academy" className={studentStyle.logoImg} />
@@ -49,6 +53,7 @@ const Thanks = () => {
 
       {/* <h1 className="little">.hola.</h1> */}
     </section>
+    </>
   )
 }
 

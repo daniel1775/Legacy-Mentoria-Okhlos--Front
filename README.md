@@ -55,7 +55,7 @@ This project was a legate from the before students in the same bootcamp, we impr
 
 Before you must run npm install in your console, to install all dependences that we used
 
-### `npm start`
+### `npm install`
 
 Then you can run:
 

@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import studentStyle from './thanksStudent.module.css';
 import logo from '../../../assets/Logo/programateAcademyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const Thanks = () => {
 
   const check = <FontAwesomeIcon icon={faCheckCircle} className={studentStyle.checkIcon} />
+  const navigated = useNavigate();
+
+  const handleNavigate = () =>{
+    navigated('/student/mentor-assigned-studentsView')
+  }
 
 
   return (
@@ -22,15 +27,11 @@ const Thanks = () => {
         </div>
         <div className={studentStyle.notifContainer}>
           <p>Te notificaremos por correo cuándo se haya realizado la asignación de tu mentor.</p>
-          <button className={studentStyle.btnFinalizar}>
-            <Link to="/student/mentor-assigned-studentsView">
-              Finalizar
-            </Link>
+          <button className={studentStyle.btnFinalizar} onClick={handleNavigate}>
+            Finalizar
           </button>
         </div>
       </article>
-
-      {/* <h1 className="little">.hola.</h1> */}
     </section>
   )
 }

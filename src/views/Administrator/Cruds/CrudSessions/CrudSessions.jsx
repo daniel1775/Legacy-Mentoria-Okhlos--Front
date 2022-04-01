@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './CrudSessions.module.css';
 import SearchContainer from '../../../../components/SearchContainer/SearchContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, TextField } from '@material-ui/core';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -60,11 +60,20 @@ const CrudSessions = () => {
 	const [modalinsertar, setmodalinsertar] = useState(false);
 	const [modaleditar, setmodaleditar] = useState(false);
 	const [choosedData, setChoosedData] = useState({});
+	const [inputValue, setInputValue] = useState("");
 
 
 	const saveOptionSelected = (data) => {
 		setChoosedData(data);
 	}
+
+
+	const search = async () => {
+		await Axios.get(`${baseUrl}/search-sessions/${inputValue}`)
+		  .then(response => {
+			setSessions(response.data[0])
+		  })
+	  }
 
 
 
@@ -83,7 +92,7 @@ const CrudSessions = () => {
 		/* console.log("SAVEDDATA: " + SavedData.gender); */
 	}, [SavedData]);
 
-	const baseUrl = process.env.REACT_APP_BACKEND_URL;
+	const baseUrl = 'https://mentoringapp-back.herokuapp.com';
 
 	//Function to insert the data written in the module.
 	const InsertData = (e) => {
@@ -339,7 +348,13 @@ const CrudSessions = () => {
 		<div className={styles.container}>
 			<h1>DETALLE DE SESIONES</h1>
 			<div className={styles.header}>
-			<input type="search" placeholder="Buscar Sesión" />
+			<div>
+            <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+            <button className={styles.search} onClick={search} >
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
+
+          </div>
 			<button onClick={() => reload()}>Actualizar tabla</button>
 			<button onClick={() => openedClosedModalInsertar()}>
 				Insertar Sesión

@@ -32,6 +32,17 @@
   width: 80%;
 }
 
+.input label input {
+  width: 20vw;
+  padding: 6px 0 6px 10px;
+}
+
+.container_automatic input {
+  width: 20vw;
+  padding: 6px 0 6px 10px;
+  align-self: flex-start;
+}
+
 .input label {
   display: flex;
   flex-direction: column;

@@ -33,6 +33,12 @@
   width: 80%;
 }
 
+.container_automatic input {
+  width: 30vw;
+  padding: 6px 0 6px 10px;
+  align-self: flex-start;
+}
+
 .input label {
   display: flex;
   flex-direction: column;
@@ -122,3 +128,10 @@
   align-items: center;
 }
 
+@media screen and (max-width: 450px){
+  .container_automatic input {
+    width: 70vw;
+    padding: 6px 0 6px 10px;
+    align-self: flex-start;
+  }
+}

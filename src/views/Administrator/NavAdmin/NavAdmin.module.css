@@ -57,7 +57,8 @@
 .items li a{
   color: black;
   text-decoration: none;
-  font-weight: normal;
+  font-weight: 900;
+  letter-spacing:1px;
 }
 
 .items li hr{

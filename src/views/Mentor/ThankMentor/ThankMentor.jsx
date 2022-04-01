@@ -1,21 +1,16 @@
 import React, { useEffect } from 'react';
 import studentStyle from './thanksStudent.module.css';
-import NavEstudent from '../../Administrator/NavStudent/NavStudent';
-
-/* import { useSelector } from 'react-redux' */
 import logo from '../../../assets/Logo/programateAcademyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
 
-const Thanks = () => {
+const ThankMentors = () => {
 
   const check = <FontAwesomeIcon icon={faCheckCircle} className={studentStyle.checkIcon} />
 
 
   return (
-    <>
-    <NavEstudent/>
     <section className={studentStyle.containerAll}>
       <div className={studentStyle.logoContainer}>
         <img src={logo} alt="Programate Academy" className={studentStyle.logoImg} />
@@ -28,7 +23,7 @@ const Thanks = () => {
         <div className={studentStyle.notifContainer}>
           <p>Te notificaremos por correo cuándo se haya realizado la asignación de tu mentor.</p>
           <button className={studentStyle.btnFinalizar}>
-            <Link to="/student/mentor-assigned-studentsView">
+            <Link to="/mentor/student-assigned">
               Finalizar
             </Link>
           </button>
@@ -37,8 +32,7 @@ const Thanks = () => {
 
       {/* <h1 className="little">.hola.</h1> */}
     </section>
-    </>
   )
 }
 
-export default Thanks
+export default ThankMentors;

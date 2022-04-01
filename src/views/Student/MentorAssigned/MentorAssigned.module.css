@@ -6,8 +6,7 @@
 .pAssigned{
     color: #FFFFFF;
     padding: 19vh 0 0 3rem;
-    font-size: 3rem;
-    font-weight: 800;
+    font-size: 2rem;
 }
 .containerAllAssigned{
     width: 100%;
@@ -19,7 +18,7 @@
     background-color: #fff;
 }
 .containerAssigned{
-    height: 15vh;
+    /* height: 40vh; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -29,9 +28,9 @@
     /* box-shadow: 0 4px 5px -1px rgb(68, 68, 68); */
 }
 .profileAssigned{
-    width: 50rem;
-    border-top: 0.5vh solid #F1F1F1;
-    border-radius: 0.5rem;
+    /* width: 35rem; */
+    border-top: 0.5vh solid #fff;
+    border-radius: 0.5rem 0 0 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -86,7 +85,6 @@
     background-color: #FFCC02;
 }
 .pSession{
-    
     text-align: center;
     margin: 1rem 2rem 1rem 2rem;
 }

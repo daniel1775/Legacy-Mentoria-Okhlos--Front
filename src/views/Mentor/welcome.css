@@ -67,3 +67,35 @@
   color: rgb(26, 25, 25) !important;
   
 }
+@media screen and (max-width: 800px){ 
+  .welcome-Mentor { 
+    width: 100%; 
+    padding: 2rem 2rem 0 2rem; 
+    display: flex; 
+    flex-direction: column; 
+    row-gap: 0rem; 
+    justify-content: center; 
+    align-items: center; 
+  } 
+  .checkMentor li { 
+    margin-left:10px ; 
+    margin-right: 5px; 
+    list-style: #C4C4C4; 
+  } 
+  .mentortitle{ 
+    font-size: 30px; 
+    font-weight: 590; 
+    margin-top: 30px; 
+  } 
+  .btnWelcomMentor{ 
+    position: relative; 
+    display: inline-block; 
+    padding: 10px 10px; 
+    background: #ffffff; 
+    color: #000; 
+    border-radius: 10px; 
+    text-decoration: none; 
+    margin-top: -15px; 
+  } 
+   
+}

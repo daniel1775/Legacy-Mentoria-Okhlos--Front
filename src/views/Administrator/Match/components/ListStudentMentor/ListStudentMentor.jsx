@@ -2,6 +2,7 @@ import style from "./ListStudentMentor.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TableItem from "./components/TableItem/TableItem";
 import { useEffect, useState } from "react";
+import ButtonModal from "./components/ButtonModal/ButtonModal";
 import axios from "axios";
 
 export default function ListStudentMentor(props) {
@@ -9,16 +10,13 @@ export default function ListStudentMentor(props) {
 
   const [ choosedData, setChoosedData ] = useState({});
   const [ mentorsAvailable, setMentorsAvailable ] = useState([]);
+  const [ studentsAvailable, setStudentsAvailable ] = useState([]);
 
-  const baseurl = process.env.REACT_APP_BACKEND_URL;
-
-  const handleButtonChange = () => {
-    
-  }
+  const baseurl = "https://mentoringapp-back.herokuapp.com";
 
   const getAllMentorsAvailable = async () => {
     try{
-			await axios.get(`${baseurl}/mentors-available`)
+			await axios.get(`${baseurl}/mentors/available`)
 				.then(response => {
           setMentorsAvailable(response.data);
 				});
@@ -27,24 +25,21 @@ export default function ListStudentMentor(props) {
 		}
   }
 
-  const getIdStudentbyName = async (name, last_name) => {
+  const getAllStudentsAvailable = async () => {
     try{
-      await axios.get(`${baseurl}/student-by-name/${name}/${last_name}`)
+			await axios.get(`${baseurl}/students/available`)
 				.then(response => {
-					
+          console.log("RESPONSE: "+JSON.stringify(response.data));
+          setStudentsAvailable(response.data);
 				});
-    }catch(err) {
-
-    }
+		}catch(err){
+			console.log(err);
+		}
   }
 
   const saveOptionSelected = (data) => {
     setChoosedData(data);
   }
-
-  useEffect(() => {
-    console.log("mentorsAvailable"+JSON.stringify(mentorsAvailable));
-  }, [ mentorsAvailable ])
 
   return (
     <div className={style.container}>
@@ -85,28 +80,17 @@ export default function ListStudentMentor(props) {
           </table>
         </div>
         <div className={style.containerbutton}>
-          <button>Agregar Match</button>
+          <ButtonModal 
+            mentorsAvailable={mentorsAvailable}
+            studentsAvailable={studentsAvailable}
+            getAllStudentsAvailable={getAllStudentsAvailable}
+            getAllMentorsAvailable={getAllMentorsAvailable}
+            cohort={cohort}
+            program={program}
+          />
         </div>
       </div>
     </div>
   );
 }
 
-/* <tr key={e.id}>
-    <td>{index + 1}</td>
-    <td>{e.name_student}</td>
-    <td>{e.last_name_student}</td>
-    <td>{e.name_mentor}</td>
-    <td>{e.last_name_mentor}</td>
-    <td>{e.score}</td>
-    <td>
-      <div className={style.containerbuttonactions}>
-        <button
-          id={style.update}
-            // onClick={() => openedClosedModalVer()}
-        >
-          <FontAwesomeIcon icon={faExchangeAlt} />
-        </button>
-      </div>
-    </td>
-  </tr> */

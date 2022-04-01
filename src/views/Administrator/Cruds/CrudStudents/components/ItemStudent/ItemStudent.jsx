@@ -1,5 +1,4 @@
 import styles from './ItemStudent.module.css';
-import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Swal from 'sweetalert2';
 import { faEdit, faTrashAlt, faEye, faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -13,17 +12,17 @@ export default function TableItem(props) {
 
 	const [SavedData, setSavedData] = useState({
 		name: data.name,
-		middleName: data.last_name,
-		lastName: '',
-		secondSurname: '',
-		actualAge: '',
-		gender: 1,
-		program: '',
-		email: '',
-		contactNumber: '',
-		cohorte: '',
+		lastName: data.last_name,
+		actualAge: data.birth_date,
+		gender: data.gender,
+		program: data.program,
+		email: data.email,
+		contactNumber: data.phone,
+		cohorte: data.cohort,
 		role: 1,
-		estado: 1,
+		state: data.active,
+		mentor: data.mentor,
+		password: data.password,
 	});
 
 	const InsertData = (e) => {
@@ -81,17 +80,6 @@ export default function TableItem(props) {
 				</div>
 				<div className="form-group col-md-6">
 					<TextField
-						name="middleName"
-						className={styles.inputMaterial}
-						label="Segundo Nombre"
-						onChange={InsertData}
-						value={SavedData && SavedData.middleName}
-					/>
-				</div>
-			</div>
-			<div className="row ">
-				<div className="form-group col-md-6">
-					<TextField
 						name="lastName"
 						className={styles.inputMaterial}
 						label="Primer Apellido"
@@ -99,16 +87,9 @@ export default function TableItem(props) {
 						value={SavedData && SavedData.lastName}
 					/>
 				</div>
-				<div className="form-group col-md-6">
-					<TextField
-						name="secondSurname"
-						className={styles.inputMaterial}
-						label="Segundo apellido"
-						onChange={InsertData}
-						value={SavedData && SavedData.secondSurname}
-					/>
-				</div>
+			
 			</div>
+		
 			<div className="row ">
 				<div className="form-group col-md-6">
 					<TextField
@@ -147,9 +128,6 @@ export default function TableItem(props) {
 						onChange={InsertData}
 						aria-label="Default select example"
 					>
-						<option value="0" selected="">
-							Programa
-						</option>
 						<option value="200">Bootcamp Prográmate</option>
 						<option value="201">Administración de Empresas</option>
 					</select>
@@ -252,21 +230,21 @@ export default function TableItem(props) {
 			<td>{data.name}</td>
 			<td>{data.last_name}</td>
 			<td>{data.birth_date}</td>
-			<td>{data.gender}</td>
+			<td>{data.gender === 2 ? "Femenino" : data.gender === 1 ? "Masculino" : data.gender === 3 ? "Otro" : null}</td>
 			<td>{data.phone}</td>
 			<td>{data.email}</td>
 			<td>{data.interest}</td>
 			<td>{data.program}</td>
 			<td>{data.mentor}</td>
-			<td>{data.active}</td>
+			<td>{data.active === 1 ? "Habilitado" : "Deshabilitado"}</td>
 			<td>
 				<div className={styles.containerbutton}>
-					<button id={styles.update}>
+				{/* 	<button id={styles.update}>
 						<FontAwesomeIcon
 							icon={faEye}
 							onClick={() => {}}
 						/>
-					</button>
+					</button> */}
 					<button id={styles.update}>
 						<FontAwesomeIcon
 							icon={faEdit}

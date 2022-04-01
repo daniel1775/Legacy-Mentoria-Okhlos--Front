@@ -5,7 +5,7 @@ import NavEstudent from '../../Administrator/NavStudent/NavStudent';
 import Card from '../../../components/Card/Card'
 import Select from 'react-select'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+import swal from 'sweetalert2'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -112,7 +112,7 @@ const MultipleChoice = () => {
         .post(`${baseUrl}/api/studentsPerfil-control-update/${idStudent}`, { interestsStudent: userinterestsStudent })
       navigate('/student/thanks-studentsView')
     } else {
-      Swal.fire('Por favor', 'Selecciona 3 intereses', 'info')
+      swal.fire('Por favor', 'Selecciona 3 intereses', 'info')
     }
 
   }

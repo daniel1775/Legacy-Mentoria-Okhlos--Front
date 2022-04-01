@@ -15,25 +15,8 @@ const Welcome= () => {
 
   const idMentor = useSelector(state => state.auth.user.id)
 
-  useEffect(() => {
-    axios({
-      url: `${baseUrl}/api/one/mentor/${idMentor}`
-    })
-      .then(response => {
-        setData(response.data)
-        //console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }, [])
-
   const navigate = useNavigate()
 
-  
-   
-  
-  
   const getInterest = () => {
     if(data.length > 0){
       if(data[0].interestsMentor.length > 0) {

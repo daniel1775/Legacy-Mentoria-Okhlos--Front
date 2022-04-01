@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import styles from "./CrudMentor.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons";
+/* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; */
+/* import { faEdit, faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons"; */
 import { makeStyles } from "@material-ui/core/styles";
 import { Modal, TextField } from "@material-ui/core";
+import "bootstrap/dist/css/bootstrap.min.css";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Axios from "axios";
 import Swal from "sweetalert2";
+import ItemMentor from './components/ItemMentor/ItemMentor'
 
 const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -135,21 +138,31 @@ const CrudMentor = () => {
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
   const [modalver, setmodalver] = useState(false);
+  //This const saved the values to edit
+  const [choosedData, setChoosedData] = useState({});
+
+  const saveOptionSelected = (data) => {
+    setChoosedData(data);
+  }
+
   //Insert saved module data
   const [SavedData, setSavedData] = useState({
-    id: "",
-    Nombres: "",
-    Apellidos: "",
-    Edad: "",
-    Género: "",
-    Teléfono: "",
-    Email: "",
-    Intereses: "",
-    Programa: "",
-    Carrera: "",
-    Empresa: "",
-    AsignaciónEst: "",
-    estado: "",
+    name: "",
+    lastName: "",
+    born: "",
+    genre: "",
+    phone: "",
+    //start
+    mailMentor: "",
+    interestsMentor: "",
+    programMentor: "",
+    studiesMentor: "",
+    businessMentor: "",
+    roleMentor: "",
+    //end
+    childs: "",
+    assignStu: "",
+    state: ""
   });
   //Function to insert the data written in the module.
   const InsertData = (e) => {
@@ -198,6 +211,36 @@ const CrudMentor = () => {
   const openedClosedModalVer = () => {
     setmodalver(!modalver);
   };
+  const reload = () => {
+		window.location.reload(true);
+	};
+
+
+  //insert mentor fuction
+  async function handleModalInsertMentor() {
+    try {
+      await Axios.post(`${baseUrl}/mentor`, {
+        name: SavedData.name,
+        last_name: SavedData.lastName,
+        birth_date: SavedData.born,
+        sons: SavedData.childs,
+        num_students: SavedData.assignStu,
+        phone: SavedData.phone,
+        email: SavedData.mailMentor,
+        interest: SavedData.interestsMentor,
+        program: SavedData.programMentor,
+        studies: SavedData.studiesMentor,
+        business: SavedData.businessMentor,
+        role: SavedData.roleMentor,
+        // 2 habilitado 1 desabilitado
+        active: SavedData.state,
+        // 1hombre 2mujer 3otro
+        gender: SavedData.genre,
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   //Modal structure Insertar
 
@@ -206,7 +249,7 @@ const CrudMentor = () => {
       <h3 className={styles.h3}>AGREGAR NUEVO MENTOR</h3>
 
       <div className="row">
-        <div className="form-group col-md-6">
+        {/* <div className="form-group col-md-6">
           <TextField
             name="id"
             className={Styles.inputMaterial}
@@ -214,82 +257,82 @@ const CrudMentor = () => {
             onChange={InsertData}
             value={SavedData && SavedData.id}
           />
-        </div>
+        </div> */}
         <div className="form-group col-md-6">
           <TextField
-            name="Nombres"
+            name="name"
             className={Styles.inputMaterial}
             label="Nombres"
             onChange={InsertData}
-            value={SavedData && SavedData.Nombres}
+            value={SavedData && SavedData.name}
           />
         </div>
       </div>
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
-            name="Apellidos"
+            name="lastName"
             className={Styles.inputMaterial}
             label="Apellidos"
             onChange={InsertData}
-            value={SavedData && SavedData.Apellidos}
+            value={SavedData && SavedData.lastName}
           />
         </div>
         <div className="form-group col-md-6">
           <select
             type="select"
             className="form-control"
-            name="Género"
+            name="genre"
             onChange={InsertData}
-            value={SavedData && SavedData.Género}
+            value={SavedData && SavedData.genre}
             aria-label="Default select example"
           >
             <option value="0" selected="">
               Género
             </option>
-            <option value="Femenino">Femenino</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Otro">Otro</option>
+            <option value="2">Femenino</option>
+            <option value="1">Masculino</option>
+            <option value="3">Otro</option>
           </select>
         </div>
       </div>
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
-            name="Edad"
+            name="born"
             className={Styles.inputMaterial}
-            label="Edad"
+            label="Fecha de nacimiento"
             onChange={InsertData}
-            value={SavedData && SavedData.Edad}
+            value={SavedData && SavedData.born}
           />
         </div>
         <div className="form-group col-md-6">
           <TextField
-            name="Hijos"
+            name="childs"
             className={Styles.inputMaterial}
-            label="Hijos"
+            label="Numero de hijos"
             onChange={InsertData}
-            value={SavedData && SavedData.Hijos}
+            value={SavedData && SavedData.childs}
           />
         </div>
       </div>
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
-            name="Intereses"
+            name="interestsMentor"
             className={Styles.inputMaterial}
             label="Intereses"
             onChange={InsertData}
-            value={SavedData && SavedData.Intereses}
+            value={SavedData && SavedData.interestsMentor}
           />
         </div>
         <div className="form-group col-md-6">
           <select
             type="select"
             className="form-control"
-            name="Programa"
+            name="programMentor"
             onChange={InsertData}
-            value={SavedData && SavedData.Programa}
+            value={SavedData && SavedData.programMentor}
             aria-label="Default select example"
           >
             <option value="0" selected="">
@@ -305,40 +348,40 @@ const CrudMentor = () => {
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
-            name="Carrera"
+            name="studiesMentor"
             className={Styles.inputMaterial}
             label="Carrera"
             onChange={InsertData}
-            value={SavedData && SavedData.Carrera}
+            value={SavedData && SavedData.studiesMentor}
           />
         </div>
         <div className="form-group col-md-6">
           <TextField
-            name="Empresa"
+            name="businessMentor"
             className={Styles.inputMaterial}
             label="Empresa"
             onChange={InsertData}
-            value={SavedData && SavedData.Empresa}
+            value={SavedData && SavedData.businessMentor}
           />
         </div>
       </div>
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
-            name="AsignaciónEst"
+            name="assignStu"
             className={Styles.inputMaterial}
             label="Asignación Estudiante"
             onChange={InsertData}
-            value={SavedData && SavedData.AsignaciónEst}
+            value={SavedData && SavedData.assignStu}
           />
         </div>
         <div className="form-group col-md-6">
           <TextField
-            name="email"
+            name="mailMentor"
             className={Styles.inputMaterial}
             label="E-mail"
             onChange={InsertData}
-            value={SavedData && SavedData.email}
+            value={SavedData && SavedData.mailMentor}
           />
         </div>
       </div>
@@ -347,25 +390,25 @@ const CrudMentor = () => {
           <select
             type="select"
             className="form-control"
-            name="estado"
+            name="state"
             onChange={InsertData}
-            value={SavedData && SavedData.estado}
+            value={SavedData && SavedData.state}
             aria-label="Default select example"
           >
             <option value="0" selected="">
               Estado
             </option>
-            <option value="Habilitado">Habilitado</option>
-            <option value="Masculino">Deshabilitado</option>
+            <option value="2">Habilitado</option>
+            <option value="1">Deshabilitado</option>
           </select>
         </div>
         <div className="form-group col-md-6">
           <TextField
-            name="telefono"
+            name="phone"
             className={Styles.inputMaterial}
-            label="Télefono"
+            label="Teléfono"
             onChange={InsertData}
-            value={SavedData && SavedData.telefono}
+            value={SavedData && SavedData.phone}
           />
         </div>
       </div>
@@ -376,7 +419,7 @@ const CrudMentor = () => {
         <button
           className={styles.button}
           onClick={() =>
-            Alertcreate() & openedClosedModalInsertar()
+            Alertcreate() & openedClosedModalInsertar() & handleModalInsertMentor()
           } /*onClick={()=>petitionPost()}*/
         >
           Insertar
@@ -390,6 +433,7 @@ const CrudMentor = () => {
       </div>
     </div>
   );
+
 
   //Modal structure Editar
 
@@ -737,8 +781,8 @@ const CrudMentor = () => {
             <option value="0" selected="">
               Estado
             </option>
-            <option value="Habilitado">Habilitado</option>
-            <option value="Masculino">Deshabilitado</option>
+            <option value="2">Habilitado</option>
+            <option value="1">Deshabilitado</option>
           </select>
         </div>
         <div className="form-group col-md-6">
@@ -770,17 +814,25 @@ const CrudMentor = () => {
       <h1>TABLA CONTROL MENTORES</h1>
       <div className={styles.header}>
         <input type="search" placeholder="Busca un Mentor" />
+        
+        <button onClick={() => reload()}>Actualizar tabla</button>
         <button onClick={() => openedClosedModalInsertar()}>
           Insertar Mentor
         </button>
-
-        <button>Insertar CVS</button>
-        <button>Descargar CVS</button>
+       
+        <ReactHTMLTableToExcel
+            id="test-table-xls-button"
+            className="download-table-xls-button"
+            table="tableMentor"
+            filename="Tabla Mentores"
+            sheet="pagina 1"
+            buttonText="Descargar CSV"
+          />
       </div>
 
       {/*mapping the yellow row data*/}
       <div class={styles.containerTable}>
-        <table className={styles.table}>
+        <table className={styles.table} id="tableMentor">
           <thead>
             {Articles.map((e) => {
               return (
@@ -806,40 +858,10 @@ const CrudMentor = () => {
           <tbody>
             {mentors.map((e) => {
               return (
-                <tr>
-                  <td>{e.id}</td>
-                  <td>{e.name}</td>
-                  <td> {e.last_name}</td>
-                  <td>{e.birth_date}</td>
-                  <td>{e.gender}</td>
-                  <td>{e.phone}</td>
-                  <td>{e.email}</td>
-                  <td>{e.interest}</td>
-                  <td>{e.program}</td>
-                  <td>{e.studies}</td>
-                  <td>{e.business}</td>
-                  <td>{e.role}</td>
-                  <td>{e.active}</td>
-                  <td>
-                    <div className={styles.containerbutton}>
-                      <button
-                        id={styles.delete}
-                        onClick={() => openedClosedModalVer()}
-                      >
-                        <FontAwesomeIcon icon={faEye} />
-                      </button>
-                      <button
-                        id={styles.update}
-                        onClick={() => openedClosedModalEditar()}
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </button>{" "}
-                      <button id={styles.delete} onClick={() => Alertdelete()}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                <ItemMentor
+                  data={e}
+                  saveOptionSelected={saveOptionSelected}
+                />
               );
             })}
           </tbody>
@@ -861,3 +883,39 @@ const CrudMentor = () => {
 };
 
 export default CrudMentor;
+
+
+{/* <tr>
+                  <td>{e.id}</td>
+                  <td>{e.name}</td>
+                  <td>{e.last_name}</td>
+                  <td>{e.birth_date}</td>
+                  <td>{e.gender === 2 ? "Femenino" : e.gender === 1 ? "Masculino" : e.gender === 3 ? "Otro" : null}</td>
+                  <td>{e.phone}</td>
+                  <td>{e.email}</td>
+                  <td>{e.interest}</td>
+                  <td>{e.program}</td>
+                  <td>{e.studies}</td>
+                  <td>{e.business}</td>
+                  <td>{e.role}</td>
+                  <td>{e.active === 2 ? "Habilitado" : "Deshabilitado"}</td>
+                  <td>
+                    <div className={styles.containerbutton}>
+                      <button
+                        id={styles.delete}
+                        onClick={() => openedClosedModalVer()}
+                      >
+                        <FontAwesomeIcon icon={faEye} />
+                      </button>
+                      <button
+                        id={styles.update}
+                        onClick={() => openedClosedModalEditar()}
+                      >
+                        <FontAwesomeIcon icon={faEdit} />
+                      </button>{" "}
+                      <button id={styles.delete} onClick={() => Alertdelete()}>
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </button>
+                    </div>
+                  </td>
+                </tr> */}

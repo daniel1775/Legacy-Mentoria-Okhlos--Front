@@ -1,10 +1,45 @@
 import style from "./ListStudentMentor.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { faEdit, faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TableItem from "./components/TableItem/TableItem";
+import { useEffect, useState } from "react";
+import ButtonModal from "./components/ButtonModal/ButtonModal";
+import axios from "axios";
 
 export default function ListStudentMentor(props) {
   const { match, cohort, program } = props;
+
+  const [ choosedData, setChoosedData ] = useState({});
+  const [ mentorsAvailable, setMentorsAvailable ] = useState([]);
+  const [ studentsAvailable, setStudentsAvailable ] = useState([]);
+
+  const baseurl = process.env.REACT_APP_BACKEND_URL;
+
+  const getAllMentorsAvailable = async () => {
+    try{
+			await axios.get(`${baseurl}/mentors/available`)
+				.then(response => {
+          setMentorsAvailable(response.data);
+				});
+		}catch(err){
+			console.log(err);
+		}
+  }
+
+  const getAllStudentsAvailable = async () => {
+    try{
+			await axios.get(`${baseurl}/students/available`)
+				.then(response => {
+          console.log("RESPONSE: "+JSON.stringify(response.data));
+          setStudentsAvailable(response.data);
+				});
+		}catch(err){
+			console.log(err);
+		}
+  }
+
+  const saveOptionSelected = (data) => {
+    setChoosedData(data);
+  }
 
   return (
     <div className={style.container}>
@@ -30,43 +65,32 @@ export default function ListStudentMentor(props) {
               </tr>
             </thead>
             <tbody>
-              {console.log(match)}
               {match.map((e, index) => {
                 return (
-                  <tr key={e.id}>
-                    <td>{index + 1}</td>
-                    <td>{e.name_student}</td>
-                    <td>{e.last_name_student}</td>
-                    <td>{e.name_mentor}</td>
-                    <td>{e.last_name_mentor}</td>
-                    <td>{e.score}</td>
-                    <td>
-                      <div className={style.containerbuttonactions}>
-                        <button
-                          id={style.update}
-                          /* onClick={() => openedClosedModalVer()} */
-                        >
-                          <FontAwesomeIcon icon={faUserPlus} />
-                        </button>
-
-                        <button
-                          id={style.update}
-                          /* onClick={() => openedClosedModalVer()} */
-                        >
-                          <FontAwesomeIcon icon={faEdit} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                  <TableItem
+                    saveOptionSelected={saveOptionSelected}
+                    data={e}
+                    num={index+1}
+                    mentorsAvailable={mentorsAvailable}
+                    getAllMentorsAvailable={getAllMentorsAvailable}
+                  />
                 );
               })}
             </tbody>
           </table>
         </div>
         <div className={style.containerbutton}>
-          <button>Agregar Match</button>
+          <ButtonModal 
+            mentorsAvailable={mentorsAvailable}
+            studentsAvailable={studentsAvailable}
+            getAllStudentsAvailable={getAllStudentsAvailable}
+            getAllMentorsAvailable={getAllMentorsAvailable}
+            cohort={cohort}
+            program={program}
+          />
         </div>
       </div>
     </div>
   );
 }
+

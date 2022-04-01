@@ -24,7 +24,7 @@ const Footer = () => {
         </section>
       </section>
       <div className='cont'>
-       <hr />
+        <hr />
       </div>
       
       <h5 className="rightsResercedText">

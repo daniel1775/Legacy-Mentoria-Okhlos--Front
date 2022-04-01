@@ -1,67 +1,99 @@
 /* ------------- LOGIN--------------- */
+
+* {
+  margin-top: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+  }
 .container {
   width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: #f1f1f1;
   padding-top: 5%;
+  flex-wrap: wrap;
+  
+
 }
-.container-login-page {
+
+.imagenlogin {
+  width: 95vh;
+  margin-top: 18px;
+}
+.boximag {
+  width: 45%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFCC02;
+}
+
+.login {
   height: 90vh;
-  width: 100%;
-  max-width: 400px;
+  width: 55%;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 40px;
   background-color: #fff;
-
+  justify-content: center;
   
 }
 .logoLogin {
-  width: 80%;
+  width: 40%;
   display: flex;
   margin: auto;
   margin-bottom: 20px;
+  margin-top: 50px;
 }
 .loginTitle{
-    font-size: 26px;
+  font-size: 26px;
   display:flex;
   justify-content: center;
   text-align: center;
   color: #000000;
   font-weight: bold;
-
+  margin-top: 20px;
+  
 }
 
-.container-login-form-content {
+.containerinput {
   display: flex;
   flex-direction: column;
-  gap: 5px 0 !important;
- 
+  gap: 18px 0 !important;
+  align-items: center;
+  
+  
+}
+
+.containerinput input{
+  margin-bottom: 15px;
+  border-radius: 10px;
+  width: 70vh;
   
 }
 .form {
-  margin-top: 7px;
+  margin-top: 10px;
 }
 
 .input-label{
 color: #000;
 padding-top: 2px;
 }
-.button-login {
-  
+
+.buttonlogin {
   font-weight: bold;
   background-color: #FFCC02;
-  margin: 10px 55px;
-  padding: 8px;
+  margin: auto;
+  padding: 9px;
   width: 100%;
   display: block;
   cursor: pointer;
   border: none;
   transition: all 0.5s;
+  justify-content: center;
 }
 
 .button-login:hover {
@@ -90,6 +122,7 @@ padding-top: 2px;
 @media (max-width: 1059px) {
   .container  {
     height: 90vh;
+    display: flex;
   }
   .form {
     margin-top: 70px;

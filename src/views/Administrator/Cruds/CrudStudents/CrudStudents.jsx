@@ -7,7 +7,8 @@ import { Modal, TextField } from "@material-ui/core";
 import Axios from "axios";
 import Swal from "sweetalert2";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import ItemStudent from './components/ItemStudent/ItemStudent.jsx';
 
 const Alertdelete = () => {
   Swal.fire({
@@ -123,9 +124,13 @@ const CrudStudents = () => {
   const [modaleditar, setmodaleditar] = useState(false);
   const [modalver, setmodalver] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  // Almacena los valores de la fila a editar
+  const [choosedData, setChoosedData] = useState({});
 
- 
-     
+  const saveOptionSelected = (data) => {
+    setChoosedData(data);
+  }
+
   //Insert saved module data
   const [SavedData, setSavedData] = useState({
     name: "",
@@ -139,15 +144,16 @@ const CrudStudents = () => {
     contactNumber: "",
     cohorte: "",
     role: 1,
-    estado: 1,
+    state: 1,
+    password:"",
   });
 
   useEffect(() => {
-    console.log("SAVEDDATA: " + SavedData.gender);
+    /* console.log("SAVEDDATA: " + SavedData.gender) */;
   }, [SavedData]);
 
   //base Url of deploy
-  const baseUrl = "https://mentoringapp-back.herokuapp.com";
+  const baseUrl = process.env.REACT_APP_BACKEND_URL;
   //Function to insert the data written in the module.
   const InsertData = (e) => {
     const { name, value } = e.target;
@@ -167,7 +173,7 @@ const CrudStudents = () => {
 
   useEffect(() => {
     Axios({
-      url: `${baseUrl}/all-students`,
+      url: `${baseUrl}/students`,
     })
       .then((response) => {
         setStudents(response.data);
@@ -191,6 +197,10 @@ const CrudStudents = () => {
     setmodalver(!modalver);
   };
 
+  const reload = () => {
+		window.location.reload(true);
+	};
+
 
 
   //Modal structure Insertar
@@ -208,6 +218,7 @@ const CrudStudents = () => {
             onChange={InsertData}
             value={SavedData && SavedData.name}
           />
+          <br />
         </div>
         <div className="form-group col-md-6">
           <TextField
@@ -251,7 +262,7 @@ const CrudStudents = () => {
           />
         </div>
         <div className="form-group col-md-6">
-        <select
+          <select
             type="select"
             className="form-control"
             name="gender"
@@ -277,9 +288,6 @@ const CrudStudents = () => {
             onChange={InsertData}
             aria-label="Default select example"
           >
-            <option value="0" selected="">
-              Programa
-            </option>
             <option value="200">Bootcamp Prográmate</option>
             <option value="201">
               Administración de Empresas
@@ -344,14 +352,14 @@ const CrudStudents = () => {
           <select
             type="select"
             className="form-control"
-            name="estado"
+            name="state"
             onChange={InsertData}
             value={SavedData && SavedData.state}
             aria-label="Default select example"
           >
             <option value="0">Deshabilitado</option>
             <option value="1">Habilitado</option>
-            
+
           </select>
         </div>
       </div>
@@ -361,7 +369,7 @@ const CrudStudents = () => {
         <button
           className={Styles.Button}
           onClick={() => {
-            Alertcreate();openedClosedModalInsertar(); handleModalInsert();
+            Alertcreate(); openedClosedModalInsertar(); handleModalInsert();
           }}
         >
           Insertar
@@ -383,22 +391,26 @@ const CrudStudents = () => {
         name: SavedData.name + SavedData.middleName,
         last_name: SavedData.lastName + SavedData.secondSurname,
         birth_date: SavedData.actualAge,
-        cohort: SavedData.cohorte,
+        gender: SavedData.gender,
         phone: SavedData.contactNumber,
+        email: SavedData.email,
+        program: SavedData.program,
+        mentor: SavedData.mentor,
         active: 1,
         gender: SavedData.gender,
+        password: SavedData.password,
       });
     } catch (err) {
       console.log(err);
     }
   }
 
-    const search=async()=>{
-      await Axios.get(`${baseUrl}/search-students/${inputValue}`)
-       .then(response=>{
+  const search = async () => {
+    await Axios.get(`${baseUrl}/search-students/${inputValue}`)
+      .then(response => {
         setStudents(response.data[0])
-       })
-     }
+      })
+  }
 
   //Modal structure Editar
 
@@ -458,7 +470,7 @@ const CrudStudents = () => {
           />
         </div>
         <div className="form-group col-md-6">
-        <select
+          <select
             type="select"
             className="form-control"
             name="gender"
@@ -484,9 +496,7 @@ const CrudStudents = () => {
             onChange={InsertData}
             aria-label="Default select example"
           >
-            <option value="0" selected="">
-              Programa
-            </option>
+           
             <option value="200">Bootcamp Prográmate</option>
             <option value="201">
               Administración de Empresas
@@ -559,7 +569,7 @@ const CrudStudents = () => {
           >
             <option value="0">Deshabilitado</option>
             <option value="1">Habilitado</option>
-            
+
           </select>
         </div>
       </div>
@@ -568,7 +578,7 @@ const CrudStudents = () => {
       <div align="center">
         <button
           className={styles.button}
-          onClick={() =>{ Alertedit(); openedClosedModalEditar()} }
+          onClick={() => { Alertedit(); openedClosedModalEditar() }}
         >
           Guardar Cambios
         </button>
@@ -582,6 +592,10 @@ const CrudStudents = () => {
       </div>
     </div>
   );
+
+  useEffect(() => {
+    console.log("CHOOSE DATA = " + JSON.stringify(choosedData))
+  }, [choosedData])
 
   //Modal structure Ver
 
@@ -641,7 +655,7 @@ const CrudStudents = () => {
           />
         </div>
         <div className="form-group col-md-6">
-        <select
+          <select
             type="select"
             className="form-control"
             name="gender"
@@ -667,9 +681,7 @@ const CrudStudents = () => {
             onChange={InsertData}
             aria-label="Default select example"
           >
-            <option value="0" selected="">
-              Programa
-            </option>
+           
             <option value="200">Bootcamp Prográmate</option>
             <option value="201">
               Administración de Empresas
@@ -741,7 +753,7 @@ const CrudStudents = () => {
           >
             <option value="0">Deshabilitado</option>
             <option value="1">Habilitado</option>
-            
+
           </select>
         </div>
       </div>
@@ -763,11 +775,13 @@ const CrudStudents = () => {
         <h1>TABLA CONTROL ESTUDIANTES</h1>
         <div className={styles.header}>
           <div className={styles.containerSearch}>
-          <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
-          <button className={styles.search} onClick={search} >
-          <FontAwesomeIcon icon={faSearch}/>
-        </button>
-        </div>
+            <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+            <button className={styles.search} onClick={search} >
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
+
+          </div>
+          <button onClick={() => reload()}>Actualizar tabla</button>
           <button onClick={() => openedClosedModalInsertar()}>
             Insertar Estudiante
           </button>
@@ -781,8 +795,8 @@ const CrudStudents = () => {
             buttonText="Descargar CSV"
           />
 
-          <button>Insertar CSV</button>
-          {/* <button >Descargar CVS</button> */}
+         
+           
         </div>
 
         <div className={styles.containerTable}>
@@ -808,7 +822,34 @@ const CrudStudents = () => {
             <tbody>
               {students.map((e) => {
                 return (
-                  <tr>
+                  <ItemStudent
+                    data={e}
+                    saveOptionSelected={saveOptionSelected}
+                  />
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <Modal open={modalinsertar} onClose={openedClosedModalInsertar}>
+          {bodyInsertar}
+        </Modal>
+
+        <Modal open={modaleditar} onClose={openedClosedModalEditar}>
+          {bodyEditar}
+        </Modal>
+
+        <Modal open={modalver} onClose={openedClosedModalVer}>
+          {bodyVer}
+        </Modal>
+      </div>
+    </>
+  );
+};
+
+export default CrudStudents;
+
+/* <tr>
                     <td>{e.id}</td>
                     <td>{e.name}</td>
                     <td>{e.last_name}</td>
@@ -843,26 +884,4 @@ const CrudStudents = () => {
                         </button>
                       </div>
                     </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        <Modal open={modalinsertar} onClose={openedClosedModalInsertar}>
-          {bodyInsertar}
-        </Modal>
-
-        <Modal open={modaleditar} onClose={openedClosedModalEditar}>
-          {bodyEditar}
-        </Modal>
-
-        <Modal open={modalver} onClose={openedClosedModalVer}>
-          {bodyVer}
-        </Modal>
-      </div>
-    </>
-  );
-};
-
-export default CrudStudents;
+                  </tr> */

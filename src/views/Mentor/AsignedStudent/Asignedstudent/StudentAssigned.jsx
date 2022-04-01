@@ -1,7 +1,8 @@
 import React from 'react';
-import stylesMentorAssigned from './MentorAssigned.module.css'
-
-const MentorAssigned = () => {
+import { FaFileImport } from 'react-icons/fa';
+import stylesMentorAssigned from './StudentAssigned.module.css'
+import profilestudent from "../../../components/assets/images/1218711_account_preppy_profile_student_user_icon.png";
+const StudentAssigned = () => {
 
 
   return (
@@ -12,13 +13,15 @@ const MentorAssigned = () => {
         <article className={stylesMentorAssigned.containerAllAssigned}>
             <article className={stylesMentorAssigned.containerAssigned}>
                 <div className={stylesMentorAssigned.profileAssigned}>
-                    <img src="" alt="Profile Picture" />
-                    <div className={stylesMentorAssigned.iconsProfileAssigned}>
+                    <img  src={profilestudent} alt="perfil" className={stylesMentorAssigned.photo} />
+                    {/* <img src="" alt="Profile Picture" /> */}
+                <div className={stylesMentorAssigned.iconsProfileAssigned}>
 
                     </div>
                 </div>
                 <div className={stylesMentorAssigned.nameAssigned}>
-                    <span className={stylesMentorAssigned.whiteTxt}>TU MENTOR ASIGNADO ES</span><br/> PEDRO PEREZ
+                    
+                    <span className={stylesMentorAssigned.whiteTxt}>TU ESTUDIANTE ASIGNADO ES</span><br/> ANGEL PEREZ
                 </div>
             </article>
             <article className={stylesMentorAssigned.containerSession}>
@@ -44,4 +47,4 @@ const MentorAssigned = () => {
   )
 }
 
-export default MentorAssigned
+export default StudentAssigned

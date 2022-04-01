@@ -43,7 +43,9 @@ const Thanks = () => {
         </div>
         <div className={studentStyle.notifContainer}>
           <p>Te notificaremos por correo cuándo se haya realizado la asignación de tu mentor.</p>
-          <button className={studentStyle.btnFinalizar}>Finalizar</button>
+          <button className={studentStyle.btnFinalizar}>
+            Finalizar
+          </button>
         </div>
       </article>
 

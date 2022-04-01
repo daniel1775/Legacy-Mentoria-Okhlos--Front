@@ -10,7 +10,7 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 import ItemMentor from './components/ItemMentor/ItemMentor'
 
-const baseUrl = process.env.REACT_APP_BACKEND_URL;
+const baseUrl = "https://mentoringapp-back.herokuapp.com";
 
 //Yellow row data
 const Articles = [

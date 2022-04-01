@@ -153,7 +153,7 @@ const CrudStudents = () => {
   }, [SavedData]);
 
   //base Url of deploy
-  const baseUrl = process.env.REACT_APP_BACKEND_URL;
+  const baseUrl = "https://mentoringapp-back.herokuapp.com";
   //Function to insert the data written in the module.
   const InsertData = (e) => {
     const { name, value } = e.target;

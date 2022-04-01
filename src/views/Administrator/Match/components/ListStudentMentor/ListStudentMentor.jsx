@@ -12,7 +12,7 @@ export default function ListStudentMentor(props) {
   const [ mentorsAvailable, setMentorsAvailable ] = useState([]);
   const [ studentsAvailable, setStudentsAvailable ] = useState([]);
 
-  const baseurl = process.env.REACT_APP_BACKEND_URL;
+  const baseurl = "https://mentoringapp-back.herokuapp.com";
 
   const getAllMentorsAvailable = async () => {
     try{

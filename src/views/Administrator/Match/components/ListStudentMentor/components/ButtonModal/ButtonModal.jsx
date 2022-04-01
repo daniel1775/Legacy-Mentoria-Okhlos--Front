@@ -13,7 +13,7 @@ export default function ButtonModal(props){
   const [ showInputMatch, setShowInputMatch ] = useState(false);
   const [ matchMentor, setMatchMentor ] = useState({});
 
-  const baseurl = process.env.REACT_APP_BACKEND_URL;
+  const baseurl = "https://mentoringapp-back.herokuapp.com";
 
   const openedClosedModalEditar = () => {
     setModalEditar(!modalEditar);

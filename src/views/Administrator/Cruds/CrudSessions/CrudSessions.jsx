@@ -83,7 +83,7 @@ const CrudSessions = () => {
 		/* console.log("SAVEDDATA: " + SavedData.gender); */
 	}, [SavedData]);
 
-	const baseUrl = process.env.REACT_APP_BACKEND_URL;
+	const baseUrl = "https://mentoringapp-back.herokuapp.com";
 
 	//Function to insert the data written in the module.
 	const InsertData = (e) => {

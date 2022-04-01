@@ -17,7 +17,7 @@ const MatchForm = () => {
   const [program, setProgram] = useState(200);
   const [ showSelectCohort, setShowSelectCohort ] = useState(true);
 
-  const baseUrl = process.env.REACT_APP_BACKEND_URL;
+  const baseUrl = "https://mentoringapp-back.herokuapp.com"
 
   // almacena el valor escogido en la seccion de cohorte (corregir)
   const handleTypeSelectCohort = e => {

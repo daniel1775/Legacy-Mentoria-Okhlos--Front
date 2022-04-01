@@ -3,7 +3,7 @@ import styles from "./formmentor.module.css";
 import Select from "react-select";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 
 function FormMentor() {
@@ -81,7 +81,6 @@ function FormMentor() {
         interestsMentor: userinterestsMentor,
         numeStudents: updateMentor.numeStudents,
       });
-      navigate("/thanks-student");
     } else {
       alert("Por favor selecciona 3 intereses");
     }
@@ -196,7 +195,9 @@ function FormMentor() {
                 }}
               />
               <button className={styles.buttonFormMentor} type="submit">
-                Enviar
+                <Link to="/mentor/thanks-mentorsView">
+                  Enviar
+                </Link>
               </button>
 
               <br />

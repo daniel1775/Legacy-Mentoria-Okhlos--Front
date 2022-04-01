@@ -8,7 +8,7 @@ import LogoPromgramate from '../../components/assets/images/programate-solo-colo
 
 const Welcome= () => {
 
-  const baseUrl = 'https://fathomless-bastion-33135.herokuapp.com'
+  const baseUrl = ''
 
   const [data, setData] = useState([])
 
@@ -62,7 +62,7 @@ const Welcome= () => {
               alguna duda.
             </li>
           </ul>
-          <Link className="btn-welcom-mentor" to="/FormMentor">
+          <Link className="btn-welcom-mentor" to="/mentor/form-mentor">
             {" "}
             Siguiente
           </Link>

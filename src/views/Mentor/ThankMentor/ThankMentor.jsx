@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
 
-const Thanks = () => {
+const ThankMentors = () => {
 
   const check = <FontAwesomeIcon icon={faCheckCircle} className={studentStyle.checkIcon} />
 
@@ -23,7 +23,7 @@ const Thanks = () => {
         <div className={studentStyle.notifContainer}>
           <p>Te notificaremos por correo cuándo se haya realizado la asignación de tu mentor.</p>
           <button className={studentStyle.btnFinalizar}>
-            <Link to="/student/mentor-assigned-studentsView">
+            <Link to="/mentor/student-assigned">
               Finalizar
             </Link>
           </button>
@@ -35,4 +35,4 @@ const Thanks = () => {
   )
 }
 
-export default Thanks
+export default ThankMentors;

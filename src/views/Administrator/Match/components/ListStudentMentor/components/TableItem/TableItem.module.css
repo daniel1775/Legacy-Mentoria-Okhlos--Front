@@ -7,14 +7,6 @@
   overflow-x: scroll;
 }
 
-.hide_container{
-  display: none;
-}
-
-.show_container{
-  display: block;
-}
-
 .container_checkbox {
   width: 80%;
   display: flex;
@@ -76,7 +68,36 @@
 }
 
 .container_automatic {
+  flex-direction: column;
+  align-items: center;
   width: 80%;
+}
+
+.container_automatic button{
+  margin-top: 5%;
+  padding: 2px 0 2px 0;
+  height: auto;
+}
+
+.container_automatic input{
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.hide_container_manual{
+  display: none;
+}
+
+.show_container_manual{
+  display: block;
+}
+
+.hide_container_automatic{
+  display: none;
+}
+
+.show_container_automatic{
+  display: flex;
 }
 
 .container_manual select {

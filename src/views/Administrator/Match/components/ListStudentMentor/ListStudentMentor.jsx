@@ -12,10 +12,6 @@ export default function ListStudentMentor(props) {
 
   const baseurl = process.env.REACT_APP_BACKEND_URL;
 
-  const handleButtonChange = () => {
-    
-  }
-
   const getAllMentorsAvailable = async () => {
     try{
 			await axios.get(`${baseurl}/mentors-available`)
@@ -77,21 +73,3 @@ export default function ListStudentMentor(props) {
   );
 }
 
-/* <tr key={e.id}>
-    <td>{index + 1}</td>
-    <td>{e.name_student}</td>
-    <td>{e.last_name_student}</td>
-    <td>{e.name_mentor}</td>
-    <td>{e.last_name_mentor}</td>
-    <td>{e.score}</td>
-    <td>
-      <div className={style.containerbuttonactions}>
-        <button
-          id={style.update}
-            // onClick={() => openedClosedModalVer()}
-        >
-          <FontAwesomeIcon icon={faExchangeAlt} />
-        </button>
-      </div>
-    </td>
-  </tr> */

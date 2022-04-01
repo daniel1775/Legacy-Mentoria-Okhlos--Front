@@ -11,12 +11,26 @@ export default function TableItem(props){
   const [ modalEditar, setModalEditar ] = useState(false);
   const [ radioCheck, setRadioCheck ] = useState(0);
   const [ mentorChoosed, setMentorChoosed ] = useState(0);
+  const [ showInputMatch, setShowInputMatch ] = useState(false);
+  const [ matchMentor, setMatchMentor ] = useState({});
 
   const baseurl = process.env.REACT_APP_BACKEND_URL;
 
   const openedClosedModalEditar = () => {
     setModalEditar(!modalEditar);
   };
+
+  const calculateMatch = async () => {
+    setShowInputMatch(true);
+    try {
+      await axios.get(`${baseurl}/match/calculate/${data.id_student}`)
+				.then(response => {
+          setMatchMentor(response.data)
+				});
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   const handlePutMatch = async () => {
     try{
@@ -30,10 +44,6 @@ export default function TableItem(props){
 			console.log(err);
 		}
   }
-
-  useEffect(() => {
-    console.log("mentorChoosed: "+mentorChoosed);
-  }, [mentorChoosed])
 
   const modal = (
     <div className={style.modal}>
@@ -55,10 +65,17 @@ export default function TableItem(props){
         </label>
       </div>
 
-      <div className={`${style.container_automatic} ${radioCheck==1 ? style.show_container : style.hide_container}`}>
-        AUTOMATICO
+      <div className={`${style.container_automatic} ${radioCheck==1 ? style.show_container_automatic : style.hide_container_automatic}`}>
+        <button onClick={calculateMatch}>Calcular match</button>
+        {showInputMatch && 
+          <>
+            <input value={`${matchMentor.name} ${matchMentor.last_name}`} type="text" readOnly />
+            <button>Confirmar</button>
+          </>
+        }
+        
       </div>
-      <div className={`${style.container_manual} ${radioCheck==2 ? style.show_container : style.hide_container}`}>
+      <div className={`${style.container_manual} ${radioCheck==2 ? style.show_container_manual : style.hide_container_manual}`}>
         <label>Mentores disponibles</label>
         <select
           type="select"
@@ -71,7 +88,7 @@ export default function TableItem(props){
             <option value={e.id}>{`${e.name_mentor} ${e.last_name_mentor}`}</option>
           ))}
         </select>
-        <button onClick={handlePutMatch}>Confirmar</button>
+        <button onClick={() => {handlePutMatch();openedClosedModalEditar()}}>Confirmar</button>
       </div>
     </div>
   )

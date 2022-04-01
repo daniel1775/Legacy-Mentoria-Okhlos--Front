@@ -9,9 +9,6 @@
 .container {
   width: 100vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   background-color: #f1f1f1;
   padding-top: 5%;
   flex-wrap: wrap;
@@ -20,7 +17,7 @@
 }
 
 .imagenlogin {
-  width: 95vh;
+  width: 95%;
   margin-top: 18px;
 }
 .boximag {
@@ -32,7 +29,7 @@
 }
 
 .login {
-  height: 90vh;
+  min-height: 400px;
   width: 55%;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
@@ -42,7 +39,7 @@
   
 }
 .logoLogin {
-  width: 40%;
+  width: 50%;
   display: flex;
   margin: auto;
   margin-bottom: 20px;
@@ -54,8 +51,8 @@
   justify-content: center;
   text-align: center;
   color: #000000;
-  font-weight: bold;
-  margin-top: 20px;
+  margin: 30px auto;
+  font-family: 'Roboto-bold', sans-serif;
   
 }
 
@@ -71,8 +68,9 @@
 .containerinput input{
   margin-bottom: 15px;
   border-radius: 10px;
-  width: 70vh;
-  
+  width: 50%;
+  height:7 vh;
+  padding-left: 20px;
 }
 .form {
   margin-top: 10px;
@@ -83,10 +81,10 @@ color: #000;
 padding-top: 2px;
 }
 
-.buttonlogin {
+.buttonLogin {
   font-weight: bold;
   background-color: #FFCC02;
-  margin: auto;
+  margin: 20px auto;
   padding: 9px;
   width: 100%;
   display: block;
@@ -94,6 +92,7 @@ padding-top: 2px;
   border: none;
   transition: all 0.5s;
   justify-content: center;
+  font-family: 'Roboto-bold', sans-serif;
 }
 
 .button-login:hover {
@@ -119,22 +118,66 @@ padding-top: 2px;
 }
 
 /* ------------- MEDIA QUERIES --------------- */
-@media (max-width: 1059px) {
+@media (max-width: 800px) {
   .container  {
-    height: 90vh;
+    height: 90%;
     display: flex;
+    flex-direction: column;
+    padding-top: 0;
   }
   .form {
     margin-top: 70px;
   }
-  .button-login {
+  .buttonLogin {
     margin: 50px auto 30px auto;
+    font-size: 22px;
+  }
+  .boximag {
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFCC02;
+  }
+  .containerinput input{
+    margin-bottom: 15px;
+    border-radius: 10px;
+    width: 70%;
+   
+    
+  }
+  
+  .login {
+    height: 90%;
+    width: 100%;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    padding: 40px;
+    background-color: #fff;
+    justify-content: center;
+    
+  }
+  .logoLogin {
+    width: 70%;
+    display: flex;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 50px;
   }
   
 }
 /* ------------- MEDIA QUERIES --------------- */
-@media (max-width: 300px) {
-  .button-login {
+@media (max-width: 500px) {
+  .buttonLogin {
     margin: 20px auto;
+    font-size: 16px;
   }
+  .containerinput input{
+    margin-bottom: 15px;
+    border-radius: 10px;
+    width: 90%;
+   
+    
+  }
+  
 }

@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { Modal, TextField } from "@material-ui/core";
+import "bootstrap/dist/css/bootstrap.min.css";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Axios from "axios";
 import Swal from "sweetalert2";
 
@@ -201,6 +203,9 @@ const CrudMentor = () => {
   const openedClosedModalVer = () => {
     setmodalver(!modalver);
   };
+  const reload = () => {
+		window.location.reload(true);
+	};
 
 
    //insert mentor fuction
@@ -795,17 +800,25 @@ const CrudMentor = () => {
       <h1>TABLA CONTROL MENTORES</h1>
       <div className={styles.header}>
         <input type="search" placeholder="Busca un Mentor" />
+        
+        <button onClick={() => reload()}>Actualizar tabla</button>
         <button onClick={() => openedClosedModalInsertar()}>
           Insertar Mentor
         </button>
-
-        <button>Insertar CVS</button>
-        <button>Descargar CVS</button>
+       
+        <ReactHTMLTableToExcel
+            id="test-table-xls-button"
+            className="download-table-xls-button"
+            table="tableMentor"
+            filename="Tabla Mentores"
+            sheet="pagina 1"
+            buttonText="Descargar CSV"
+          />
       </div>
 
       {/*mapping the yellow row data*/}
       <div class={styles.containerTable}>
-        <table className={styles.table}>
+        <table className={styles.table} id="tableMentor">
           <thead>
             {Articles.map((e) => {
               return (

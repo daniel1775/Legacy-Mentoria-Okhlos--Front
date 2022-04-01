@@ -135,7 +135,11 @@ button {
 #delete :hover {
 	color: red;
 }
-
+.containerSearch{
+	display:flex;
+	align-items: center;
+	
+  }
 .modal {
 	max-width: 500px;
 	background-color: #ffffff;

@@ -823,7 +823,7 @@ const CrudMentor = () => {
     <div className={styles.container}>
       <h1>TABLA CONTROL MENTORES</h1>
       <div className={styles.header}>
-      <div>
+      <div className={styles.containerSearch}>
             <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
             <button className={styles.search} onClick={search} >
               <FontAwesomeIcon icon={faSearch} />

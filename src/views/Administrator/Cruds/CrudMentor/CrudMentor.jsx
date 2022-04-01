@@ -309,6 +309,7 @@ const CrudMentor = () => {
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
+           type="date"
             name="born"
             className={Styles.inputMaterial}
             label="Fecha de nacimiento"
@@ -502,9 +503,10 @@ const CrudMentor = () => {
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
+          type="date"
             name="Edad"
             className={Styles.inputMaterial}
-            label="Edad"
+            label="Fecha de naciniemto"
             onChange={InsertData}
             value={SavedData && SavedData.Edad}
           />
@@ -692,9 +694,10 @@ const CrudMentor = () => {
       <div className="row">
         <div className="form-group col-md-6">
           <TextField
+            type="date"
             name="Edad"
             className={Styles.inputMaterial}
-            label="Edad"
+            label="Fecha de nacimiento"
             onChange={InsertData}
             value={SavedData && SavedData.Edad}
           />

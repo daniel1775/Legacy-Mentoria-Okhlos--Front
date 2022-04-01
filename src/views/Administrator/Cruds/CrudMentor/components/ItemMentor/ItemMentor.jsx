@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Styles from "./ItemMentor.module.css";
+import styles from "./ItemMentor.module.css";
 import Swal from "sweetalert2";
 import { Modal, TextField } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -101,14 +101,14 @@ const ItemMentor = (props) => {
 
     //Modal structure Editar
     const bodyEditar = (
-        <div className={Styles.modal}>
-            <h3 className={Styles.h3}>EDITAR MENTOR</h3>
+        <div className={styles.modal}>
+            <h3 className={styles.h3}>EDITAR MENTOR</h3>
 
             <div className="row">
                 {/* <div className="form-group col-md-6">
                     <TextField
                         name="id"
-                        className={Styles.inputMaterial}
+                        className={styles.inputMaterial}
                         label="Id"
                         onChange={InsertData}
                         value={SavedData && SavedData.id}
@@ -117,7 +117,7 @@ const ItemMentor = (props) => {
                 <div className="form-group col-md-6">
                     <TextField
                         name="name"
-                        className={Styles.inputMaterial}
+                        className={styles.inputMaterial}
                         label="Nombres"
                         onChange={InsertData}
                         value={SavedData && SavedData.name}
@@ -128,7 +128,7 @@ const ItemMentor = (props) => {
                 <div className="form-group col-md-6">
                     <TextField
                         name="lastName"
-                        className={Styles.inputMaterial}
+                        className={styles.inputMaterial}
                         label="Apellidos"
                         onChange={InsertData}
                         value={SavedData && SavedData.lastName}
@@ -156,8 +156,8 @@ const ItemMentor = (props) => {
                 <div className="form-group col-md-6">
                     <TextField
                         name="born"
-                        className={Styles.inputMaterial}
-                        label="Edad"
+                        className={styles.inputMaterial}
+                        label="Fecha de nacimiento"
                         onChange={InsertData}
                         value={SavedData && SavedData.born}
                     />
@@ -165,7 +165,7 @@ const ItemMentor = (props) => {
                 <div className="form-group col-md-6">
                     <TextField
                         name="childs"
-                        className={Styles.inputMaterial}
+                        className={styles.inputMaterial}
                         label="Hijos"
                         onChange={InsertData}
                         value={SavedData && SavedData.childs}
@@ -176,7 +176,7 @@ const ItemMentor = (props) => {
                 <div className="form-group col-md-6">
                     <TextField
                         name="interestsMentor"
-                        className={Styles.inputMaterial}
+                        className={styles.inputMaterial}
                         label="Intereses"
                         onChange={InsertData}
                         value={SavedData && SavedData.interestsMentor}
@@ -205,7 +205,7 @@ const ItemMentor = (props) => {
                 <div className="form-group col-md-6">
                     <TextField
                         name="studiesMentor"
-                        className={Styles.inputMaterial}
+                        className={styles.inputMaterial}
                         label="Carrera"
                         onChange={InsertData}
                         value={SavedData && SavedData.studiesMentor}
@@ -214,7 +214,7 @@ const ItemMentor = (props) => {
                 <div className="form-group col-md-6">
                     <TextField
                         name="businessMentor"
-                        className={Styles.inputMaterial}
+                        className={styles.inputMaterial}
                         label="Empresa"
                         onChange={InsertData}
                         value={SavedData && SavedData.businessMentor}
@@ -225,7 +225,7 @@ const ItemMentor = (props) => {
                 <div className="form-group col-md-6">
                     <TextField
                         name="assignStu"
-                        className={Styles.inputMaterial}
+                        className={styles.inputMaterial}
                         label="Asignación Estudiante"
                         onChange={InsertData}
                         value={SavedData && SavedData.assignStu}
@@ -234,7 +234,7 @@ const ItemMentor = (props) => {
                 <div className="form-group col-md-6">
                     <TextField
                         name="mailMentor"
-                        className={Styles.inputMaterial}
+                        className={styles.inputMaterial}
                         label="E-mail"
                         onChange={InsertData}
                         value={SavedData && SavedData.mailMentor}
@@ -261,7 +261,7 @@ const ItemMentor = (props) => {
                 <div className="form-group col-md-6">
                     <TextField
                         name="phone"
-                        className={Styles.inputMaterial}
+                        className={styles.inputMaterial}
                         label="Télefono"
                         onChange={InsertData}
                         value={SavedData && SavedData.phone}
@@ -273,13 +273,13 @@ const ItemMentor = (props) => {
 
             <div align="center">
                 <button
-                    className={Styles.button}
+                    className={styles.button}
                     onClick={() => Alertedit() & openedClosedModalEditar()}
                 >
                     Guardar Cambios
                 </button>
                 <button
-                    className={Styles.button}
+                    className={styles.button}
                     onClick={() => openedClosedModalEditar()}
                 >
                     Cancelar
@@ -303,9 +303,9 @@ const ItemMentor = (props) => {
             <td>{data.role}</td>
             <td>{data.active === 2 ? "Habilitado" : "Deshabilitado"}</td>
             <td>
-                <div className={Styles.containerbutton}>
+                <div className={styles.containerbutton}>
                     <button
-                        id={Styles.update}
+                        id={styles.update}
                         onClick={() => {
                             saveOptionSelected(data)
                             openedClosedModalEditar()
@@ -313,11 +313,11 @@ const ItemMentor = (props) => {
                     >
                         <FontAwesomeIcon icon={faEdit} />
                     </button>{" "}
-                    <button id={Styles.delete} onClick={() => Alertdelete()}>
+                    <button id={styles.delete} onClick={() => Alertdelete()}>
                         <FontAwesomeIcon icon={faTrashAlt} />
                     </button>
                     {/* <button
-                        className={Styles.button}
+                        className={styles.button}
                         onClick={() => openedClosedModalVer()}
                     >
                         Cerrar

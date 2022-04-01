@@ -348,7 +348,7 @@ const CrudSessions = () => {
 		<div className={styles.container}>
 			<h1>DETALLE DE SESIONES</h1>
 			<div className={styles.header}>
-			<div>  className={styles.containerSearch}
+			<div className={styles.containerSearch}>  
             <input type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
             <button className={styles.search} onClick={search} >
               <FontAwesomeIcon icon={faSearch} />

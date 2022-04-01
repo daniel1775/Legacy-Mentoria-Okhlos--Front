@@ -230,21 +230,21 @@ export default function TableItem(props) {
 			<td>{data.name}</td>
 			<td>{data.last_name}</td>
 			<td>{data.birth_date}</td>
-			<td>{data.gender}</td>
+			<td>{data.gender === 2 ? "Femenino" : data.gender === 1 ? "Masculino" : data.gender === 3 ? "Otro" : null}</td>
 			<td>{data.phone}</td>
 			<td>{data.email}</td>
 			<td>{data.interest}</td>
 			<td>{data.program}</td>
 			<td>{data.mentor}</td>
-			<td>{data.active}</td>
+			<td>{data.active === 1 ? "Habilitado" : "Deshabilitado"}</td>
 			<td>
 				<div className={styles.containerbutton}>
-					<button id={styles.update}>
+				{/* 	<button id={styles.update}>
 						<FontAwesomeIcon
 							icon={faEye}
 							onClick={() => {}}
 						/>
-					</button>
+					</button> */}
 					<button id={styles.update}>
 						<FontAwesomeIcon
 							icon={faEdit}

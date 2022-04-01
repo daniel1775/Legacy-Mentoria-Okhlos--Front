@@ -18,11 +18,16 @@ import CrudSessionsDetail from './views/Administrator/Cruds/CrudSessionDetail/Cr
 import WelcomeMentor from './views/Mentor/Welcome'
 import HomeMentor from './views/Mentor/Homementor'
 import FormMentor from './views/Mentor/FormMentor'
+import StudentAssigned from './views/Mentor/AsignedStudent/Asignedstudent/StudentAssigned.jsx';
+import ThankMentor from './views/Mentor/ThankMentor/ThankMentor';
+
+// student imports views //
+import WelcomeStudent from './views/Student/Welcome/WelcomeStudent.jsx'
 
 import { useEffect, useState } from 'react';
 //student imports components
 import MultipleChoice from './views/Student/MultipleChoice/MultipleChoice.jsx';
-import Thanks from './views/Student/Thanks/Thanks.jsx'
+import ThankStudent from './views/Student/Thanks/Thanks.jsx'
 import MentorAssigned from './views/Student/MentorAssigned/MentorAssigned.jsx';
 import { Home } from '@material-ui/icons';
 
@@ -62,21 +67,19 @@ function App() {
 				<Route path="/crud-sessions-detail" element={<CrudSessionsDetail />} />
 				<Route path="/crud-sessions" element={<CrudSessions />} />
 				
-
-				
-
 				{/* Student's routes */}
-				<Route path="/student" element={<CrudSessions />} />
+				<Route path="/student" element={<WelcomeStudent />} />
 				<Route path="/student/select-studentInterests" element={<MultipleChoice/>} />
-				<Route path="/student/thanks-studentsView" element={<Thanks/>} />
+				<Route path="/student/thanks-studentsView" element={<ThankStudent/>} />
 				<Route path="/student/mentor-assigned-studentsView" element={<MentorAssigned/>} />
-				<Route path="/student/welcomeCard" element={<WelcomeCard />} />
+				{/* <Route path="/student/welcomeCard" element={<WelcomeCard />} /> */}
 
 				{/* Mentor's routes */}
-				<Route path="/mentor" element={<CrudMentors />} />
-				<Route path="/welcome-mentor" element={<WelcomeMentor/>}/>
-				<Route path="/home-mentor" element={<HomeMentor/>}/>
-				<Route path="/form-mentor" element={<FormMentor/>}/>
+				<Route path="/mentor" element={<WelcomeMentor />}/>
+				<Route path="/mentor/form-mentor" element={<FormMentor/>}/>
+				<Route path="/mentor/thanks-mentorsView" element={<ThankMentor/>} />
+				<Route path="/mentor/student-assigned" element={<StudentAssigned/>}/>
+				
 
 			</Routes>
 			<Footer />

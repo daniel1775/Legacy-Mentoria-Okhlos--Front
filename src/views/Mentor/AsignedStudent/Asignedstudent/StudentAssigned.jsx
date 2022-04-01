@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaFileImport } from 'react-icons/fa';
 import stylesMentorAssigned from './StudentAssigned.module.css'
-import profilestudent from "../../../components/assets/images/1218711_account_preppy_profile_student_user_icon.png";
+import profilestudent from "../../../../components/assets/images/profile.jpg";
 const StudentAssigned = () => {
 
 

@@ -62,7 +62,7 @@ export default function Login(props) {
 					</div>
 
 					<button
-						className={style.buttonlogin}
+						className={style.buttonLogin}
 						type="submit"
 						onClick={sendLogin}
 					>

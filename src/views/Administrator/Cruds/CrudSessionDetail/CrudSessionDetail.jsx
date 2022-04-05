@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./CrudSessionDetail.module.css";
+import NavAdmin from '../../NavAdmin/NavAdmin';
 import SearchContainer from "../../../../components/SearchContainer/SearchContainer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt,faEye } from "@fortawesome/free-solid-svg-icons";
@@ -165,7 +166,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CrudSessionDetail = () => {
+const CrudSessionDetail = () => { 
   const [data, setData] = useState([]);
   const Styles = useStyles();
   const [modalinsertar, setmodalinsertar] = useState(false);
@@ -432,6 +433,8 @@ const CrudSessionDetail = () => {
   );
 
   return (
+    <>
+		<NavAdmin/>
     <div className={styles.container}>
       {/* <Sidebar/> */}
       <SearchContainer
@@ -508,6 +511,7 @@ const CrudSessionDetail = () => {
         {bodyVer}
       </Modal>
     </div>
+    </>
   );
 };
 

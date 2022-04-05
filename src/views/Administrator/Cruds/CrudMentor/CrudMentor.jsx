@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./CrudMentor.module.css";
+import NavAdmin from '../../NavAdmin/NavAdmin';
 /* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; */
 /* import { faEdit, faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons"; */
 import { makeStyles } from "@material-ui/core/styles";
@@ -135,7 +136,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CrudMentor = () => {
+const CrudMentor = () => { 
   const Styles = useStyles();
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
@@ -823,6 +824,8 @@ const CrudMentor = () => {
   );
 
   return (
+    <>
+		<NavAdmin/>
     <div className={styles.container}>
       <h1>TABLA CONTROL MENTORES</h1>
       <div className={styles.header}>
@@ -898,6 +901,7 @@ const CrudMentor = () => {
         {bodyVer}
       </Modal>
     </div>
+    </>
   );
 };
 

@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import style from './matchform.module.css';
 import ListStudentMentor from './components/ListStudentMentor/ListStudentMentor';
+import NavAdmin from '../NavAdmin/NavAdmin';
 import Cohort from './components/Cohort/Cohort';
+
 
 const MatchForm = () => {
   const [students, setStudents] = useState([])
@@ -42,6 +44,8 @@ const MatchForm = () => {
   }
 
   return (
+    <>
+		<NavAdmin/>
     <div>
       {showViewCohort ? 
         <Cohort
@@ -58,6 +62,7 @@ const MatchForm = () => {
         />
       }
     </div>
+    </>
   )
 }
 

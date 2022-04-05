@@ -1,6 +1,7 @@
 import style from './Login.module.css';
 import logo from '../../assets/Logo/programateAcademyLogo.png';
-import imalog from '../../components/assets/images/img6.jpg'
+import imalog from '../../components/assets/images/img6.jpg';
+import NavLogin from './NavLogin/NavLogin';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -24,6 +25,8 @@ export default function Login(props) {
 	}
 
 	return (
+		<>
+		<NavLogin/>
 		<div className={style.container}>
 		
 			<div className={style.boximag}>
@@ -72,5 +75,6 @@ export default function Login(props) {
 			</div>
 			
 		</div>
+		</>
 	);
 }

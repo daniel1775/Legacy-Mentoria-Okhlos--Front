@@ -1,7 +1,8 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import NavAdmin from './views/Administrator/NavAdmin/NavAdmin';
+
 import Login from './views/Login/Login';
+
 
 
 // import NotFound from './views/General/NotFound'
@@ -54,7 +55,7 @@ function App() {
 
 	return (
 		<>
-			<NavAdmin />
+			
 			<Routes>
 				{/* Login's routes */}
 				<Route path="/" element={<Login setRole={setRole}/>} />

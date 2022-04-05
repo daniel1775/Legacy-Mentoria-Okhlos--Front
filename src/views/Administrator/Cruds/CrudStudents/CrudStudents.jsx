@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./Style.module.css";
+import NavAdmin from '../../NavAdmin/NavAdmin';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt, faEye, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { makeStyles } from "@material-ui/core/styles";
@@ -118,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CrudStudents = () => {
+const CrudStudents = () => { 
   const Styles = useStyles();
   const [modalinsertar, setmodalinsertar] = useState(false);
   const [modaleditar, setmodaleditar] = useState(false);
@@ -771,6 +772,8 @@ const CrudStudents = () => {
 
   return (
     <>
+    
+		<NavAdmin/>
       <div className={styles.container}>
         <h1>TABLA CONTROL ESTUDIANTES</h1>
         <div className={styles.header}>

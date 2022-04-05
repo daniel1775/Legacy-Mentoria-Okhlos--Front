@@ -11,20 +11,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  
   background-color: #f1f1f1;
-  padding-top: 5%;
+  
   flex-wrap: wrap;
   
 
 }
 
 .imagenlogin {
-  width: 95vh;
-  margin-top: 18px;
+  width: 100vh;
+  margin-top: 10px;
 }
 .boximag {
-  width: 45%; 
+  width: 42%; 
   display: flex;
   justify-content: center;
   align-items: center;

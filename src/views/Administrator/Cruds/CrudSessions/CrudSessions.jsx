@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './CrudSessions.module.css';
-
+import NavAdmin from '../../NavAdmin/NavAdmin';
 
 import SearchContainer from '../../../../components/SearchContainer/SearchContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const CrudSessions = () => {
+const CrudSessions = () => { 
 	const Styles = useStyles();
 	const [modalinsertar, setmodalinsertar] = useState(false);
 	const [modaleditar, setmodaleditar] = useState(false);
@@ -347,6 +347,8 @@ const CrudSessions = () => {
 
 
 	return (
+		<>
+		<NavAdmin/>
 		<div className={styles.container}>
 			<h1>DETALLE DE SESIONES</h1>
 			<div className={styles.header}>
@@ -410,6 +412,7 @@ const CrudSessions = () => {
 			</Modal>
 
 		</div>
+		</>
 	);
 };
 

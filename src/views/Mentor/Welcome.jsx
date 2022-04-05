@@ -1,4 +1,5 @@
-import './welcome.css'
+import React from 'react';
+import styles from './welcome.module.css'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -27,13 +28,13 @@ const Welcome= () => {
   getInterest()
 
   return (
-    <section class="container-homesession">
-        <div className='logoContainer'>
-          <img  src={LogoPromgramate} alt="logo" className='logoImg' />
+    <section class={styles.containerHomeSession} >
+        <div className={styles.logoContainer} >
+          <img  src={LogoPromgramate} alt="logo" className={styles.logoImg} />
         </div>
-        <div className="welcome-mentor">
-          <h2 className='mentortitle'>Estimado mentor(a)</h2>
-          <ul className='check-mentor'>
+        <div className={styles.welcomeMentor} >
+          <h2 className={styles.mentortitle}>Estimado Mentor/a</h2>
+          <ul className={styles.checkMentor} >
             <li>Gracias por realizar la inscripción.</li>
 
             <li>
@@ -45,7 +46,7 @@ const Welcome= () => {
               alguna duda.
             </li>
           </ul>
-          <Link className="btn-welcom-mentor" to="/mentor/form-mentor">
+          <Link className={styles.btnWelcomMentor} to="/mentor/form-mentor">
             {" "}
             Siguiente
           </Link>
@@ -57,3 +58,42 @@ const Welcome= () => {
 }
 
 export default Welcome
+
+
+/* const WelcomeCard = () => {
+    return (
+        <div>  
+          <div className={styles.containerOne}>
+            <div className={styles.progressContainer}>
+                <div className={styles.progress}> 
+                  <div className={styles.circle.active}>1</div>
+                  <div className={styles.circle}>2</div>
+                  <div className={styles.circle}>3</div>
+              </div>
+            </div>
+          </div>
+            <div className={styles.container}>
+              <div className={styles.back}>
+                <div className={styles.card}>
+                  <div className={styles.box}>
+                    <div className={styles.content}>
+                    <h3>Querido/a estudiante</h3>
+                      <ul className={styles.list}>
+
+                          <li>Gracias por realizar la inscripción.</li>
+                          <li>No olvides completar los 3 pasos para empezar tu proceso de mentoría.</li>
+                          <li>Puedes contactar con tus formadores, si tienes alguna duda.</li>
+                      </ul>
+                      <a href="#n" className={styles.btn}>Siguiente</a>
+                    </div>              
+                  </div>
+                  {/* -------------------<h1 className="little">.hola.</h1> }
+                </div>
+              </div>  
+          </div>
+        </div>
+    )
+}
+
+export default WelcomeCard
+*/

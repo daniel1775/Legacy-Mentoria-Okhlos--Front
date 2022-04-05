@@ -39,7 +39,7 @@ const Welcome= () => {
 
             <li>
               {" "}
-              No olvides completar los 3 pasos para crear tú perfil como mentor.
+              No olvides completar los 3 pasos para crear tú perfil como estudiante/a.
             </li>
             <li>
               Contacta con el equipo administrativo de Educamás, si tienes

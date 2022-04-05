@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import Styles from './MultipleChoice.module.css'
+import NavEstudent from '../../Administrator/NavStudent/NavStudent';
+
 import Card from '../../../components/Card/Card'
 import Select from 'react-select'
 import axios from 'axios'
@@ -116,6 +118,8 @@ const MultipleChoice = () => {
   }
 
   return (
+    <>
+    <NavEstudent/>
     <section className={Styles.contAll}>
       <div className={Styles.contenedor}>
         <div className={Styles.header}>
@@ -148,6 +152,7 @@ const MultipleChoice = () => {
       </div>
       <div className={Styles.foot}></div>
     </section>
+    </>
   )
 }
 

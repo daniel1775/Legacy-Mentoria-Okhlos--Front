@@ -7,7 +7,7 @@
   
   }
 .container {
-  width: 100vw;
+  width: auto;
   display: flex;
   background-color: #f1f1f1;
   padding-top: 5%;

@@ -1,5 +1,6 @@
 import React from 'react';
-import stylesMentorAssigned from './MentorAssigned.module.css'
+import stylesMentorAssigned from './MentorAssigned.module.css';
+import NavEstudent from '../../Administrator/NavStudent/NavStudent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +14,8 @@ const MentorAssigned = () => {
     const bell = <FontAwesomeIcon icon={faBell} className={stylesMentorAssigned.assignedIcons} /> /* IconFormFA */
 
   return (
+      <>
+      <NavEstudent/>
     <section>
         <div className={stylesMentorAssigned.headerAssigned}>
             <h3 className={stylesMentorAssigned.pAssigned}>SESIONES</h3>
@@ -51,6 +54,7 @@ const MentorAssigned = () => {
             </article>
         </article>
     </section>
+    </>
   )
 }
 

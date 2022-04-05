@@ -66,6 +66,10 @@
   align-items: center;
   font-family: "Roboto-bold", sans-serif;
 }
+.buttonFormMentor a {
+  color: #000;
+  text-decoration: none;
+}
 
 .payment {
   background-color: #ffcc02;

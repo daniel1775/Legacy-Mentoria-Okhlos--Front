@@ -1,30 +1,16 @@
-import ACTIONS from '../actions/'
-
 const initialState = {
-    user: [],
-    isLogged: false,
-    isAdmin: false,
-    isStudent: false
+    value: 0,
+  }
+  
+const increment= (state) => {
+    
+    state.value += 1
 }
 
-const authReducer = (state = initialState, action) => {
-    switch(action.type){
-        // 
-        case ACTIONS.LOGIN:
-            return {
-                ...state,
-                isLogged: true
-            }
-        case ACTIONS.GET_USER:
-            return {
-                ...state,
-                user: action.payload.user,
-                isAdmin: action.payload.isAdmin,
-                isStudent: action.payload.isStudent
-            }
-        default:
-            return state
-    }
+const decrement= (state) => {
+    state.value -= 1
 }
 
-export default authReducer
+const incrementByAmount= (state, action) => {
+    state.value += action.payload
+}

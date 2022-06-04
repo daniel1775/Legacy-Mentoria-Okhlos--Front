@@ -1,0 +1,26 @@
+export {default as Login} from "./Login";
+export {default as BienvenidaOkhlos} from "./BienvenidaOkhlos"
+export {default as DashboardOptions} from "./DashboardOptions"
+export {default as CardsInfo} from "./CardsInfo"
+export {default as DataStudent} from "./DataStudent"
+export {default as ComboBoxPreferStudent} from "./ComboBoxPreferStudent"
+export {default as AddStudent} from "./AddStudent"
+export {default as ItemMenu} from "./ItemMenu"
+export {default as AdminWithName} from "./AdminWithName"
+export {default as OnlyItemMenu} from "./OnlyItemMenu"
+export {default as SocialMedia} from "./SocialMedia"
+export {default as UserLogin} from './UserLogin';
+export {default as Perfil} from './Perfil';
+export {default as PageOptionsTitle} from './PageOptionsTitle';
+export {default as OptionTable} from './OptionTable';
+export {default as OptionTableAdmin} from './OptionTableAdmin';
+export {default as FooterModal} from './FooterModal';
+export {default as IconMenuResponsive} from './IconMenuResponsive'
+export {default as DataMentor} from './DataMentor';
+export {default as ModalUpdate} from './ModalUpdate';
+export {default as DataStudentUpdate} from './DataStudentUpdate';
+export {default as DataMentorUpdate} from './DataMentorUpdate';
+export {default as FormMatch} from './FormMatch' 
+export {default as OptionTableMatch} from './OptionTableMatch' 
+export {default as DataMatch} from './DataMatch' 
+
